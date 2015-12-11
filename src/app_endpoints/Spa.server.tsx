@@ -20,7 +20,8 @@ export default class Spa extends React.Component<SpaProps, any>
 		<ReduxFullPageLayout
 			title={this.props.title}
 			pageName="spa"
-			store={this.props.store}>
+			store={this.props.store}
+			isDevelopment={true}>
 			<App.SpaApp title={this.props.title} />
 			</ReduxFullPageLayout>);
 	}

@@ -28,31 +28,36 @@ export default class SpaChild extends React.Component<SpaChildProps, any> {
   render() {
     //get values from props
     const {
+      message,
       containerMessage,
       params: { id }, //from url by router
     } = this.props;
     
     //create elements
-    let idDom = null;
-    let msgDom = null;
-    if (id) {
-      idDom = id;
-    }
-    if (containerMessage) {
-      msgDom = containerMessage;
-    }
-    let message = this.props.message ? { type: "info", text: this.props.message } : { type: "none", text: "" };
+    let containerMessageProps = containerMessage ?
+      { type: "info", text: "id:" + containerMessage } :
+      { type: "error", text: "no container message" }
+    let idProps = id ?
+      { type: "info", text: "id:" + id } :
+      { type: "error", text: "no id" }
+    let messageProps = message ?
+      { type: "info", text: message } :
+      { type: "error", text: "no message" }
 
     return (
       <section>
         <h1>Child</h1>
         <section>
           <h1>From Container</h1>
-          <p>Container Message: {msgDom}</p>
+          <p>
+            <MessageArea message={containerMessageProps} />
+            </p>
           </section>
         <section>
           <h1>From Url Params</h1>
-          <p>ID: {idDom} (from url params) </p>
+          <p>
+            <MessageArea message={idProps} />
+            </p>
           </section>
         <section>
           <h1>Child State</h1>
@@ -63,7 +68,7 @@ export default class SpaChild extends React.Component<SpaChildProps, any> {
                 <input type="button" value="Change" onClick={this.handleChangeClick} />
                 </p>
               <p>
-                <MessageArea message={message} />
+                <MessageArea message={messageProps} />
                 </p>
             </div>
           </section>

@@ -50,20 +50,15 @@ var SpaChild = (function (_React$Component) {
         value: function render() {
             //get values from props
             var _props = this.props;
+            var message = _props.message;
             var containerMessage = _props.containerMessage;
             var id = _props.params.id;
             //create elements
 
-            var idDom = null;
-            var msgDom = null;
-            if (id) {
-                idDom = id;
-            }
-            if (containerMessage) {
-                msgDom = containerMessage;
-            }
-            var message = this.props.message ? { type: "info", text: this.props.message } : { type: "none", text: "" };
-            return React.createElement("section", null, React.createElement("h1", null, "Child"), React.createElement("section", null, React.createElement("h1", null, "From Container"), React.createElement("p", null, "Container Message: ", msgDom)), React.createElement("section", null, React.createElement("h1", null, "From Url Params"), React.createElement("p", null, "ID: ", idDom, " (from url params) ")), React.createElement("section", null, React.createElement("h1", null, "Child State"), React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": message })))));
+            var containerMessageProps = containerMessage ? { type: "info", text: "id:" + containerMessage } : { type: "error", text: "no container message" };
+            var idProps = id ? { type: "info", text: "id:" + id } : { type: "error", text: "no id" };
+            var messageProps = message ? { type: "info", text: message } : { type: "error", text: "no message" };
+            return React.createElement("section", null, React.createElement("h1", null, "Child"), React.createElement("section", null, React.createElement("h1", null, "From Container"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": containerMessageProps }))), React.createElement("section", null, React.createElement("h1", null, "From Url Params"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": idProps }))), React.createElement("section", null, React.createElement("h1", null, "Child State"), React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": messageProps })))));
         }
     }]);
 

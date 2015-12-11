@@ -28,6 +28,10 @@ var _SpaContainerActions = require('../actions/SpaContainerActions');
 
 var SpaContainerActions = _interopRequireWildcard(_SpaContainerActions);
 
+var _SpaChildActions = require('../actions/SpaChildActions');
+
+var SpaChildActions = _interopRequireWildcard(_SpaChildActions);
+
 var _SpaContainer = require('../components/views/SpaContainer');
 
 var _SpaContainer2 = _interopRequireDefault(_SpaContainer);
@@ -95,7 +99,7 @@ var components = {
     }, function (dispatch) {
         //merge actions
         var actions = { pushState: pushState };
-        Object.assign(actions, SpaContainerActions);
+        Object.assign(actions, SpaChildActions);
         return (0, _redux.bindActionCreators)(actions, dispatch);
     })(_SpaChild2.default)
 };

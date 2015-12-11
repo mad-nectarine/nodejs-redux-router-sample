@@ -21,7 +21,11 @@ var ReduxRouter = require('redux-router/server');
 var router = express.Router();
 /* GET home page. */
 router.get('/*', function (req, res, next) {
-    var store = App.CreateServerStore(null, true);
+    var initialState = {
+        container: { message: "init contaier msg on server" },
+        child: { message: "init child msg on server" }
+    };
+    var store = App.CreateServerStore(initialState, true);
     var location = (0, _history.createLocation)(req.url);
     store.dispatch(ReduxRouter.match(location, function (error, redirectLocation) {
         if (error) {} else if (redirectLocation) {} else {

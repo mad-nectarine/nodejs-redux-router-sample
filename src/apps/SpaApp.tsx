@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 // == import application modules ==
 import DefaultLayout from '../components/layouts/DefaultLayout'
 import * as SpaContainerActions from '../actions/SpaContainerActions'
+import * as SpaChildActions from '../actions/SpaChildActions'
 import SpaContainer from '../components/views/SpaContainer'
 import SpaContainerReducer from '../reducers/SpaContainerReducer'
 import SpaChildReducer from '../reducers/SpaChildReducer'
@@ -47,7 +48,7 @@ var components = {
         (dispatch) => {
             //merge actions
             let actions = { pushState };
-            Object.assign(actions, SpaContainerActions);
+            Object.assign(actions, SpaChildActions);
             return bindActionCreators(actions, dispatch);
         })(SpaChild)
 }

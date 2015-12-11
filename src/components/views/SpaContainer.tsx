@@ -47,7 +47,7 @@ export default class SpaContainer extends React.Component<SpaContainerProps, any
       <li><Link to={l} key={index}>{l}</Link></li>
       );
       
-    let message = this.props.message ? { type: "info", text: this.props.message } : { type: "none", text: "" };
+    let message = this.props.message ? { type: "info", text: this.props.message } : { type: "error", text: "no message" };
 
     return (
       <div>

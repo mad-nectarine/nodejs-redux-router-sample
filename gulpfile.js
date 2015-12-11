@@ -197,7 +197,7 @@ gulp.task("build", function (callback) {
         "tsc-compile",
         "jsconfig-update",
         "babel",
-        //"browserify-release",
+        "browserify-release",
         "browserify-debug",
         callback);
 });

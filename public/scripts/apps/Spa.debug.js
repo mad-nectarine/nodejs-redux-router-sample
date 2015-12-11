@@ -30843,6 +30843,10 @@ var _SpaContainerActions = require('../actions/SpaContainerActions');
 
 var SpaContainerActions = _interopRequireWildcard(_SpaContainerActions);
 
+var _SpaChildActions = require('../actions/SpaChildActions');
+
+var SpaChildActions = _interopRequireWildcard(_SpaChildActions);
+
 var _SpaContainer = require('../components/views/SpaContainer');
 
 var _SpaContainer2 = _interopRequireDefault(_SpaContainer);
@@ -30910,7 +30914,7 @@ var components = {
     }, function (dispatch) {
         //merge actions
         var actions = { pushState: pushState };
-        Object.assign(actions, SpaContainerActions);
+        Object.assign(actions, SpaChildActions);
         return (0, _redux.bindActionCreators)(actions, dispatch);
     })(_SpaChild2.default)
 };
@@ -30957,7 +30961,7 @@ var SpaApp = exports.SpaApp = (function (_React$Component) {
     return SpaApp;
 })(React.Component);
 
-},{"../actions/SpaContainerActions":402,"../components/layouts/DefaultLayout":405,"../components/views/SpaChild":408,"../components/views/SpaContainer":409,"../components/views/SpaParent":410,"../reducers/SpaChildReducer":411,"../reducers/SpaContainerReducer":412,"../util/StoreFactory":413,"react":302,"react-redux":145,"react-router":169,"redux":390,"redux-router":365}],405:[function(require,module,exports){
+},{"../actions/SpaChildActions":401,"../actions/SpaContainerActions":402,"../components/layouts/DefaultLayout":405,"../components/views/SpaChild":408,"../components/views/SpaContainer":409,"../components/views/SpaParent":410,"../reducers/SpaChildReducer":411,"../reducers/SpaContainerReducer":412,"../util/StoreFactory":413,"react":302,"react-redux":145,"react-router":169,"redux":390,"redux-router":365}],405:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -31151,20 +31155,15 @@ var SpaChild = (function (_React$Component) {
         value: function render() {
             //get values from props
             var _props = this.props;
+            var message = _props.message;
             var containerMessage = _props.containerMessage;
             var id = _props.params.id;
             //create elements
 
-            var idDom = null;
-            var msgDom = null;
-            if (id) {
-                idDom = id;
-            }
-            if (containerMessage) {
-                msgDom = containerMessage;
-            }
-            var message = this.props.message ? { type: "info", text: this.props.message } : { type: "none", text: "" };
-            return React.createElement("section", null, React.createElement("h1", null, "Child"), React.createElement("section", null, React.createElement("h1", null, "From Container"), React.createElement("p", null, "Container Message: ", msgDom)), React.createElement("section", null, React.createElement("h1", null, "From Url Params"), React.createElement("p", null, "ID: ", idDom, " (from url params) ")), React.createElement("section", null, React.createElement("h1", null, "Child State"), React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": message })))));
+            var containerMessageProps = containerMessage ? { type: "info", text: "id:" + containerMessage } : { type: "error", text: "no container message" };
+            var idProps = id ? { type: "info", text: "id:" + id } : { type: "error", text: "no id" };
+            var messageProps = message ? { type: "info", text: message } : { type: "error", text: "no message" };
+            return React.createElement("section", null, React.createElement("h1", null, "Child"), React.createElement("section", null, React.createElement("h1", null, "From Container"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": containerMessageProps }))), React.createElement("section", null, React.createElement("h1", null, "From Url Params"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": idProps }))), React.createElement("section", null, React.createElement("h1", null, "Child State"), React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": messageProps })))));
         }
     }]);
 
@@ -31239,7 +31238,7 @@ var SpaContainer = (function (_React$Component) {
             var links = ['/', '/parent?foo=bar', '/parent/child?bar=baz', '/parent/child/123?baz=foo'].map(function (l, index) {
                 return React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": l, "key": index }, l));
             });
-            var message = this.props.message ? { type: "info", text: this.props.message } : { type: "none", text: "" };
+            var message = this.props.message ? { type: "info", text: this.props.message } : { type: "error", text: "no message" };
             return React.createElement("div", null, React.createElement("h1", null, "App Container"), React.createElement("div", { "className": "side-contents" }, React.createElement("ul", { "className": "links list" }, links, React.createElement("li", null, React.createElement("a", { "href": "#", "onClick": this.handleClick }, "/parent/child/custom")))), React.createElement("div", { "className": "main-contents" }, React.createElement("section", null, React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": message })))), React.createElement("section", null, this.props.children)));
         }
     }]);
@@ -31359,11 +31358,8 @@ exports.default = Reducer;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.ServerDefault = ServerDefault;
 exports.RouterAppServerDefault = RouterAppServerDefault;
 exports.RouterAppClientDefault = RouterAppClientDefault;
-exports.ClientDefault = ClientDefault;
-exports.Make = Make;
 
 var _redux = require('redux');
 
@@ -31377,69 +31373,93 @@ var _history = require('history');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 var _require = require('redux-router');
 
 var routerStateReducer = _require.routerStateReducer;
 var reduxReactRouter = _require.reduxReactRouter;
 
 var ReduxRouterServer = require('redux-router/server');
-function ServerDefault(reducer, initialState, hasDevTool) {
-    var storeComponents = [(0, _redux.applyMiddleware)(_reduxThunk2.default)];
-    if (hasDevTool) {
-        storeComponents = storeComponents.concat([(0, _reduxDevtools.devTools)()]);
-    }
-    return Make.apply(undefined, [reducer, initialState].concat(_toConsumableArray(storeComponents)));
-}
 function RouterAppServerDefault(routes, reducers, initialState, hasDevTool) {
-    //const middleware = [createMiddleware(client), transitionMiddleware];
+    //** initial state **
+    //initial state must not be "undefined"
+    //if it is, exception is thrown
+    initialState = initialState || {};
+    //** merge reducers **
+    //you must add reducer for redux-router
     var reducer = {
         router: routerStateReducer
     };
     Object.assign(reducer, reducers);
+    var mergedReducer = (0, _redux.combineReducers)(reducer);
+    //** set components **
     var finalCreateStore = undefined;
     finalCreateStore = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);
+    if (hasDevTool) {
+        finalCreateStore = (0, _reduxDevtools.devTools)()(finalCreateStore);
+    }
+    //** for redux-router / on server **
+    //1. must use reduxReactRouter for server
+    //2. routes is required -- ex: function getRoutes() { return (<Route path="/" component="hoge">....) }
     finalCreateStore = ReduxRouterServer.reduxReactRouter({ routes: routes })(finalCreateStore);
-    var store = finalCreateStore((0, _redux.combineReducers)(reducer));
-    return store;
-    // let storeComponents = [
-    // 	applyMiddleware(thunk),
-    // 	ReduxRouterServer.reduxReactRouter({ routes })
-    // ]
-    // if (hasDevTool) {
-    // 	storeComponents = storeComponents.concat([
-    // 		devTools()
-    // 	])
-    // }
-    // return CcreateStore(reduxReactRouter, routes, createHistory, reducer);
-    //return Make(reducer, initialState, ...storeComponents)
+    return finalCreateStore(mergedReducer, initialState);
 }
 function RouterAppClientDefault(reducers, initialState, hasDevTool) {
+    //** initial state **
+    //initial state must not be "undefined"
+    //if it is, exception is thrown
+    initialState = initialState || {};
+    //** merge reducers **
+    //you must add reducer for redux-router
     var reducer = {
         router: routerStateReducer
     };
     Object.assign(reducer, reducers);
-    var storeComponents = [(0, _redux.applyMiddleware)(_reduxThunk2.default), reduxReactRouter({ createHistory: _history.createHistory })];
+    var mergedReducer = (0, _redux.combineReducers)(reducer);
+    //** set components **
+    var finalCreateStore = undefined;
+    finalCreateStore = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);
     if (hasDevTool) {
-        storeComponents = storeComponents.concat([(0, _reduxDevtools.devTools)()]);
+        finalCreateStore = (0, _reduxDevtools.devTools)()(finalCreateStore);
+        finalCreateStore = (0, _reduxDevtools.persistState)(window.location.href.match(/[?&]debug_session=([^&]+)\b/))(finalCreateStore);
     }
-    return Make.apply(undefined, [(0, _redux.combineReducers)(reducer), initialState].concat(_toConsumableArray(storeComponents)));
+    //** for redux-router / on client **
+    //1. must use reduxReactRouter for client
+    //2. you can use createHistory, only on client
+    finalCreateStore = reduxReactRouter({ createHistory: _history.createHistory })(finalCreateStore);
+    return finalCreateStore(mergedReducer, initialState);
 }
-function ClientDefault(reducer, initialState, hasDevTool) {
-    var storeComponents = [(0, _redux.applyMiddleware)(_reduxThunk2.default)];
-    if (hasDevTool) {
-        storeComponents = storeComponents.concat([(0, _reduxDevtools.devTools)(), (0, _reduxDevtools.persistState)(window.location.href.match(/[?&]debug_session=([^&]+)\b/))]);
-    }
-    return Make.apply(undefined, [reducer, initialState].concat(_toConsumableArray(storeComponents)));
-}
-function Make(reducer, initialState) {
-    for (var _len = arguments.length, storeComponents = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-        storeComponents[_key - 2] = arguments[_key];
-    }
+/* =========== not use this sample ============*/
+/*
+import { Reducer, Middleware, compose } from 'redux'
 
-    var finalCreateStore = _redux.compose.apply(undefined, storeComponents)(_redux.createStore);
+export function ServerDefault(reducer: Reducer, initialState: any, hasDevTool: boolean): any {
+    let storeComponents = [
+        applyMiddleware(thunk)
+    ];
+    if (hasDevTool) {
+        storeComponents = storeComponents.concat([
+            devTools()
+        ]);
+    }
+    return Make(reducer, initialState, ...storeComponents)
+}
+export function ClientDefault(reducer: Reducer, initialState: any, hasDevTool: boolean): any {
+    let storeComponents = [
+        applyMiddleware(thunk)
+    ];
+    if (hasDevTool) {
+        storeComponents = storeComponents.concat([
+            devTools(),
+            persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+        ]);
+    }
+    return Make(reducer, initialState, ...storeComponents);
+}
+
+export function Make(reducer: Reducer, initialState: any, ...storeComponents: Function[]): any {
+    let finalCreateStore = compose(...storeComponents)(createStore);
     return finalCreateStore(reducer, initialState);
 }
+*/
 
 },{"history":110,"redux":390,"redux-devtools":305,"redux-router":365,"redux-router/server":387,"redux-thunk":388}]},{},[403]);

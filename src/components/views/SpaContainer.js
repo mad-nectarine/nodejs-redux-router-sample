@@ -63,7 +63,7 @@ var SpaContainer = (function (_React$Component) {
             var links = ['/', '/parent?foo=bar', '/parent/child?bar=baz', '/parent/child/123?baz=foo'].map(function (l, index) {
                 return React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": l, "key": index }, l));
             });
-            var message = this.props.message ? { type: "info", text: this.props.message } : { type: "none", text: "" };
+            var message = this.props.message ? { type: "info", text: this.props.message } : { type: "error", text: "no message" };
             return React.createElement("div", null, React.createElement("h1", null, "App Container"), React.createElement("div", { "className": "side-contents" }, React.createElement("ul", { "className": "links list" }, links, React.createElement("li", null, React.createElement("a", { "href": "#", "onClick": this.handleClick }, "/parent/child/custom")))), React.createElement("div", { "className": "main-contents" }, React.createElement("section", null, React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": message })))), React.createElement("section", null, this.props.children)));
         }
     }]);
