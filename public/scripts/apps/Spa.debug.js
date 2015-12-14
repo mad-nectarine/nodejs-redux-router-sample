@@ -30747,17 +30747,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.changeMessage = changeMessage;
 //types
-var SpaChildActionTypes = exports.SpaChildActionTypes = {
-    CHANGE_MESSAGE: "CHILD.CHANGE_MESSAGE"
+var BasicChildActionTypes = exports.BasicChildActionTypes = {
+    CHANGE_MESSAGE: "BASIC_CHILD.CHANGE_MESSAGE"
 };
 //creators
 function changeMessage(message) {
     return {
-        type: SpaChildActionTypes.CHANGE_MESSAGE,
+        type: BasicChildActionTypes.CHANGE_MESSAGE,
         message: message
     };
 }
-;
 
 },{}],402:[function(require,module,exports){
 "use strict";
@@ -30767,19 +30766,68 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.changeMessage = changeMessage;
 //types
-var SpaContainerActionTypes = exports.SpaContainerActionTypes = {
-    CHANGE_MESSAGE: "SPA.CHANGE_MESSAGE"
+var BasicParentActionTypes = exports.BasicParentActionTypes = {
+    CHANGE_MESSAGE: "BASIC_PARENT.CHANGE_MESSAGE"
 };
 //creators
 function changeMessage(message) {
     return {
-        type: SpaContainerActionTypes.CHANGE_MESSAGE,
+        type: BasicParentActionTypes.CHANGE_MESSAGE,
         message: message
     };
 }
-;
 
 },{}],403:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.select = select;
+exports.add = add;
+exports.remove = remove;
+exports.update = update;
+exports.reload = reload;
+//types
+var ListDetailParentActionTypes = exports.ListDetailParentActionTypes = {
+    SELECT: "LISTDETAIL_PARENT.SELECT",
+    ADD: "LISTDETAIL_PARENT.ADD",
+    REMOVE: "LISTDETAIL_PARENT.REMOVE",
+    UPDATE: "LISTDETAIL_PARENT.UPDATE",
+    RELOAD: "LISTDETAIL_PARENT.RELOAD"
+};
+//creators
+function select(id) {
+    return {
+        type: ListDetailParentActionTypes.SELECT,
+        id: id
+    };
+}
+function add(item) {
+    return {
+        type: ListDetailParentActionTypes.ADD,
+        item: item
+    };
+}
+function remove(id) {
+    return {
+        type: ListDetailParentActionTypes.REMOVE,
+        id: id
+    };
+}
+function update(item) {
+    return {
+        type: ListDetailParentActionTypes.UPDATE,
+        item: item
+    };
+}
+function reload() {
+    return {
+        type: ListDetailParentActionTypes.RELOAD
+    };
+}
+
+},{}],404:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -30812,7 +30860,7 @@ var store = App.CreateClientStore(initialState, isDevelopment);
 var contents = React.createElement(_ReduxProviderLayout2.default, { "store": store, "hasDevTool": isDevelopment }, React.createElement(App.SpaApp, { "title": document.title }));
 ReactDom.render(contents, rootElement);
 
-},{"../apps/SpaApp":404,"../components/layouts/ReduxProviderLayout":406,"react":302,"react-dom":123}],404:[function(require,module,exports){
+},{"../apps/SpaApp":405,"../components/layouts/ReduxProviderLayout":407,"react":302,"react-dom":123}],405:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -30839,37 +30887,53 @@ var _DefaultLayout = require('../components/layouts/DefaultLayout');
 
 var _DefaultLayout2 = _interopRequireDefault(_DefaultLayout);
 
-var _SpaContainerActions = require('../actions/SpaContainerActions');
+var _AppContainer = require('../components/views/AppContainer');
 
-var SpaContainerActions = _interopRequireWildcard(_SpaContainerActions);
+var _AppContainer2 = _interopRequireDefault(_AppContainer);
 
-var _SpaChildActions = require('../actions/SpaChildActions');
+var _UrlUnMatch = require('../components/views/UrlUnMatch');
 
-var SpaChildActions = _interopRequireWildcard(_SpaChildActions);
-
-var _SpaContainer = require('../components/views/SpaContainer');
-
-var _SpaContainer2 = _interopRequireDefault(_SpaContainer);
-
-var _SpaContainerReducer = require('../reducers/SpaContainerReducer');
-
-var _SpaContainerReducer2 = _interopRequireDefault(_SpaContainerReducer);
-
-var _SpaChildReducer = require('../reducers/SpaChildReducer');
-
-var _SpaChildReducer2 = _interopRequireDefault(_SpaChildReducer);
-
-var _SpaParent = require('../components/views/SpaParent');
-
-var _SpaParent2 = _interopRequireDefault(_SpaParent);
-
-var _SpaChild = require('../components/views/SpaChild');
-
-var _SpaChild2 = _interopRequireDefault(_SpaChild);
+var _UrlUnMatch2 = _interopRequireDefault(_UrlUnMatch);
 
 var _StoreFactory = require('../util/StoreFactory');
 
 var StoreFactory = _interopRequireWildcard(_StoreFactory);
+
+var _BasicParent = require('../components/views/BasicParent');
+
+var _BasicParent2 = _interopRequireDefault(_BasicParent);
+
+var _BasicParentActions = require('../actions/BasicParentActions');
+
+var BasicParentActions = _interopRequireWildcard(_BasicParentActions);
+
+var _BasicParentReducer = require('../reducers/BasicParentReducer');
+
+var _BasicParentReducer2 = _interopRequireDefault(_BasicParentReducer);
+
+var _BasicChild = require('../components/views/BasicChild');
+
+var _BasicChild2 = _interopRequireDefault(_BasicChild);
+
+var _BasicChildActions = require('../actions/BasicChildActions');
+
+var BasicChildActions = _interopRequireWildcard(_BasicChildActions);
+
+var _BasicChildReducer = require('../reducers/BasicChildReducer');
+
+var _BasicChildReducer2 = _interopRequireDefault(_BasicChildReducer);
+
+var _ListDetailParent = require('../components/views/ListDetailParent');
+
+var _ListDetailParent2 = _interopRequireDefault(_ListDetailParent);
+
+var _ListDetailParentActions = require('../actions/ListDetailParentActions');
+
+var ListDetailParentActions = _interopRequireWildcard(_ListDetailParentActions);
+
+var _ListDetailParentReducer = require('../reducers/ListDetailParentReducer');
+
+var _ListDetailParentReducer2 = _interopRequireDefault(_ListDetailParentReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30889,40 +30953,59 @@ var pushState = _require.pushState;
 
 //====== bind state and action to components props ======
 var components = {
-    /* bind SpaContainer */
-    SpaContainer: (0, _reactRedux.connect)(function (state) {
+    /* bind AppContainer */
+    AppContainer: (0, _reactRedux.connect)(function (state) {
+        return {};
+    }, function (dispatch) {
+        return (0, _redux.bindActionCreators)({ pushState: pushState }, dispatch);
+    })(_AppContainer2.default),
+    /* bind BasicParent */
+    BasicParent: (0, _reactRedux.connect)(function (state) {
         return {
-            message: state.container.message
+            message: state.basicParent.message
         };
     }, function (dispatch) {
         //merge actions
         var actions = {
             pushState: pushState //"pushState" is a function,so you must set as a property. 
         };
-        Object.assign(actions, SpaContainerActions);
+        Object.assign(actions, BasicParentActions);
         //you can merge more actions
         //Object.assign(actions, hogeActionCreator, fugaActionCreator);
         //bind actions to dispatcher
         return (0, _redux.bindActionCreators)(actions, dispatch);
-    })(_SpaContainer2.default),
-    /* bind SpaChild */
-    SpaChild: (0, _reactRedux.connect)(function (state) {
+    })(_BasicParent2.default),
+    /* bind BasicChild */
+    BasicChild: (0, _reactRedux.connect)(function (state) {
         return {
-            message: state.child.message,
-            containerMessage: state.container.message
+            message: state.basicChild.message,
+            parentMessage: state.basicParent.message
         };
     }, function (dispatch) {
         //merge actions
         var actions = { pushState: pushState };
-        Object.assign(actions, SpaChildActions);
+        Object.assign(actions, BasicChildActions);
         return (0, _redux.bindActionCreators)(actions, dispatch);
-    })(_SpaChild2.default)
+    })(_BasicChild2.default),
+    /* bind BasicChild */
+    ListDetailParent: (0, _reactRedux.connect)(function (state) {
+        return {
+            selectedId: state.listDetailParent.selectedId,
+            items: state.listDetailParent.items
+        };
+    }, function (dispatch) {
+        //merge actions
+        var actions = { pushState: pushState };
+        Object.assign(actions, ListDetailParentActions);
+        return (0, _redux.bindActionCreators)(actions, dispatch);
+    })(_ListDetailParent2.default)
 };
 //====== create store functions ======
 function CreateServerStore(initialState, isDevelopment) {
     var reducer = {
-        container: _SpaContainerReducer2.default,
-        child: _SpaChildReducer2.default
+        basicParent: _BasicParentReducer2.default,
+        basicChild: _BasicChildReducer2.default,
+        listDetailParent: _ListDetailParentReducer2.default
     };
     //create store
     var store = StoreFactory.RouterAppServerDefault(getRoutes(), reducer, initialState, isDevelopment);
@@ -30930,8 +31013,9 @@ function CreateServerStore(initialState, isDevelopment) {
 }
 function CreateClientStore(initialState, isDevelopment) {
     var reducer = {
-        container: _SpaContainerReducer2.default,
-        child: _SpaChildReducer2.default
+        basicParent: _BasicParentReducer2.default,
+        basicChild: _BasicChildReducer2.default,
+        listDetailParent: _ListDetailParentReducer2.default
     };
     //create store
     var store = StoreFactory.RouterAppClientDefault(reducer, initialState, isDevelopment);
@@ -30939,7 +31023,7 @@ function CreateClientStore(initialState, isDevelopment) {
 }
 //====== app component ======
 function getRoutes() {
-    return React.createElement(_reactRouter.Route, { "path": "/", "component": components.SpaContainer }, React.createElement(_reactRouter.Route, { "path": "parent", "component": _SpaParent2.default }, React.createElement(_reactRouter.Route, { "path": "child", "component": components.SpaChild }), React.createElement(_reactRouter.Route, { "path": "child/:id", "component": components.SpaChild })));
+    return React.createElement(_reactRouter.Route, { "path": "/", "component": components.AppContainer }, React.createElement(_reactRouter.Route, { "path": "basic/parent", "component": components.BasicParent }, React.createElement(_reactRouter.Route, { "path": "child", "component": components.BasicChild }), React.createElement(_reactRouter.Route, { "path": "child/:id", "component": components.BasicChild })), React.createElement(_reactRouter.Route, { "path": "list", "component": components.ListDetailParent }), React.createElement(_reactRouter.Route, { "path": "*", "component": _UrlUnMatch2.default, "status": 404 }));
 }
 
 var SpaApp = exports.SpaApp = (function (_React$Component) {
@@ -30961,7 +31045,7 @@ var SpaApp = exports.SpaApp = (function (_React$Component) {
     return SpaApp;
 })(React.Component);
 
-},{"../actions/SpaChildActions":401,"../actions/SpaContainerActions":402,"../components/layouts/DefaultLayout":405,"../components/views/SpaChild":408,"../components/views/SpaContainer":409,"../components/views/SpaParent":410,"../reducers/SpaChildReducer":411,"../reducers/SpaContainerReducer":412,"../util/StoreFactory":413,"react":302,"react-redux":145,"react-router":169,"redux":390,"redux-router":365}],405:[function(require,module,exports){
+},{"../actions/BasicChildActions":401,"../actions/BasicParentActions":402,"../actions/ListDetailParentActions":403,"../components/layouts/DefaultLayout":406,"../components/views/AppContainer":408,"../components/views/BasicChild":409,"../components/views/BasicParent":410,"../components/views/ListDetailParent":411,"../components/views/UrlUnMatch":413,"../reducers/BasicChildReducer":414,"../reducers/BasicParentReducer":415,"../reducers/ListDetailParentReducer":416,"../util/StoreFactory":417,"react":302,"react-redux":145,"react-router":169,"redux":390,"redux-router":365}],406:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -31005,7 +31089,7 @@ exports.default = DefaultLayout;
 
 module.exports = DefaultLayout;
 
-},{"react":302}],406:[function(require,module,exports){
+},{"react":302}],407:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -31057,7 +31141,263 @@ exports.default = ReduxProviderLayout;
 
 module.exports = ReduxProviderLayout;
 
-},{"react":302,"react-redux":145,"redux-devtools/lib/react":312}],407:[function(require,module,exports){
+},{"react":302,"react-redux":145,"redux-devtools/lib/react":312}],408:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var React = _interopRequireWildcard(_react);
+
+var _reactRouter = require('react-router');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AppContainer = (function (_React$Component) {
+    _inherits(AppContainer, _React$Component);
+
+    function AppContainer(props) {
+        _classCallCheck(this, AppContainer);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AppContainer).call(this, props));
+
+        _this.handleClick = _this.handleClick.bind(_this);
+        return _this;
+    }
+
+    _createClass(AppContainer, [{
+        key: 'handleClick',
+        value: function handleClick(event) {
+            event.preventDefault();
+            this.props.pushState(null, '/basic/parent/child/custom');
+            //if not connect actions to props
+            // const { dispatch } = this.props;
+            // dispatch(pushState(null, '/parent/child/custom'));
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return React.createElement("div", null, React.createElement("h1", null, "App Container"), React.createElement("div", { "className": "side-contents" }, React.createElement("ul", { "className": "links list" }, React.createElement("li", { "className": "unselectable" }, React.createElement("p", null, "Basic"), React.createElement("ul", null, React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/basic/parent" }, "/parent")), React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/basic/parent/child" }, "/parent/child")), React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/basic/parent/child/123" }, "/parent/child/123")), React.createElement("li", null, React.createElement("a", { "href": "#", "onClick": this.handleClick }, "/parent/child/custom(click) ")))), React.createElement("li", { "className": "unselectable" }, React.createElement("p", null, "List-Detail"), React.createElement("ul", null, React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/list" }, "/")), React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/list/detail" }, "/detail")), React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/list/detail/1" }, "/detail/1")))), React.createElement("li", { "className": "unselectable" }, React.createElement("p", null, "Authentication"), React.createElement("ul", null, React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/auth/login" }, "/login")), React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": "/auth/needAuth" }, "/needAuth")))))), React.createElement("div", { "className": "main-contents" }, React.createElement("section", null, this.props.children)));
+        }
+    }]);
+
+    return AppContainer;
+})(React.Component);
+
+exports.default = AppContainer;
+
+},{"react":302,"react-router":169}],409:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var React = _interopRequireWildcard(_react);
+
+var _MessageArea = require('./MessageArea');
+
+var _MessageArea2 = _interopRequireDefault(_MessageArea);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BasicChild = (function (_React$Component) {
+    _inherits(BasicChild, _React$Component);
+
+    function BasicChild(props) {
+        _classCallCheck(this, BasicChild);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BasicChild).call(this, props));
+
+        _this.handleChangeClick = _this.handleChangeClick.bind(_this);
+        return _this;
+    }
+
+    _createClass(BasicChild, [{
+        key: 'handleChangeClick',
+        value: function handleChangeClick(event) {
+            event.preventDefault();
+            this.props.changeMessage(this.refs["message"].value);
+            //if not connect actions to props
+            // const { dispatch } = this.props
+            //dispatch(IndexActions.changeMessage({ text: "test", type: "error" }))
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            //get values from props
+            var _props = this.props;
+            var message = _props.message;
+            var parentMessage = _props.parentMessage;
+            var id = _props.params.id;
+            //create elements
+
+            var parentMessageProps = parentMessage ? { type: "info", text: "id:" + parentMessage } : { type: "error", text: "no parent message" };
+            var idProps = id ? { type: "info", text: "id:" + id } : { type: "error", text: "no id" };
+            var messageProps = message ? { type: "info", text: message } : { type: "error", text: "no message" };
+            return React.createElement("section", null, React.createElement("h1", null, "Child"), React.createElement("section", null, React.createElement("h1", null, "From Parent"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": parentMessageProps }))), React.createElement("section", null, React.createElement("h1", null, "From Url Params"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": idProps }))), React.createElement("section", null, React.createElement("h1", null, "Child State"), React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": messageProps })))));
+        }
+    }]);
+
+    return BasicChild;
+})(React.Component);
+
+exports.default = BasicChild;
+
+},{"./MessageArea":412,"react":302}],410:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var React = _interopRequireWildcard(_react);
+
+var _MessageArea = require('./MessageArea');
+
+var _MessageArea2 = _interopRequireDefault(_MessageArea);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BasicParent = (function (_React$Component) {
+    _inherits(BasicParent, _React$Component);
+
+    function BasicParent(props) {
+        _classCallCheck(this, BasicParent);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BasicParent).call(this, props));
+
+        _this.handleChangeClick = _this.handleChangeClick.bind(_this);
+        return _this;
+    }
+
+    _createClass(BasicParent, [{
+        key: 'handleChangeClick',
+        value: function handleChangeClick(event) {
+            event.preventDefault();
+            this.props.changeMessage(this.refs["message"].value);
+            //if not connect actions to props
+            // const { dispatch } = this.props
+            //dispatch(IndexActions.changeMessage({ text: "test", type: "error" }))
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            //get values from props
+            var message = this.props.message;
+            //create elements
+
+            var messageProps = message ? { type: "info", text: message } : { type: "error", text: "no message" };
+            return React.createElement("section", null, React.createElement("h2", null, "Parent"), React.createElement("section", null, React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": messageProps })))), this.props.children);
+        }
+    }]);
+
+    return BasicParent;
+})(React.Component);
+
+exports.default = BasicParent;
+
+},{"./MessageArea":412,"react":302}],411:[function(require,module,exports){
+"use strict";
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require("react");
+
+var React = _interopRequireWildcard(_react);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ListDetailParent = (function (_React$Component) {
+    _inherits(ListDetailParent, _React$Component);
+
+    function ListDetailParent() {
+        _classCallCheck(this, ListDetailParent);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ListDetailParent).apply(this, arguments));
+    }
+
+    _createClass(ListDetailParent, [{
+        key: "handleSelect",
+        value: function handleSelect(item, event) {
+            if (item) {
+                this.props.select(item.id);
+            }
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var _this2 = this;
+
+            //get values from props
+            var _props = this.props;
+            var items = _props.items;
+            var selectedId = _props.selectedId;
+
+            var itemsDom = null;
+            if (items) {
+                itemsDom = items.map(function (item) {
+                    var isSelected = item.id == selectedId;
+                    var className = isSelected ? "selected" : "";
+                    var click = _this2.handleSelect.bind(_this2, item);
+                    return React.createElement("li", { "className": className, "key": item.id, "onClick": click }, item.name);
+                });
+            }
+            return React.createElement("section", null, React.createElement("h2", null, "List"), React.createElement("section", null, React.createElement("ul", { "className": "list" }, itemsDom)), React.createElement("section", null, this.props.children));
+        }
+    }]);
+
+    return ListDetailParent;
+})(React.Component);
+
+exports.default = ListDetailParent;
+
+},{"react":302}],412:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -31102,153 +31442,7 @@ var MessageArea = (function (_React$Component) {
 
 exports.default = MessageArea;
 
-},{"react":302}],408:[function(require,module,exports){
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var React = _interopRequireWildcard(_react);
-
-var _MessageArea = require('./MessageArea');
-
-var _MessageArea2 = _interopRequireDefault(_MessageArea);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SpaChild = (function (_React$Component) {
-    _inherits(SpaChild, _React$Component);
-
-    function SpaChild(props) {
-        _classCallCheck(this, SpaChild);
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpaChild).call(this, props));
-
-        _this.handleChangeClick = _this.handleChangeClick.bind(_this);
-        return _this;
-    }
-
-    _createClass(SpaChild, [{
-        key: 'handleChangeClick',
-        value: function handleChangeClick(event) {
-            event.preventDefault();
-            this.props.changeMessage(this.refs["message"].value);
-            //if not connect actions to props
-            // const { dispatch } = this.props
-            //dispatch(IndexActions.changeMessage({ text: "test", type: "error" }))
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            //get values from props
-            var _props = this.props;
-            var message = _props.message;
-            var containerMessage = _props.containerMessage;
-            var id = _props.params.id;
-            //create elements
-
-            var containerMessageProps = containerMessage ? { type: "info", text: "id:" + containerMessage } : { type: "error", text: "no container message" };
-            var idProps = id ? { type: "info", text: "id:" + id } : { type: "error", text: "no id" };
-            var messageProps = message ? { type: "info", text: message } : { type: "error", text: "no message" };
-            return React.createElement("section", null, React.createElement("h1", null, "Child"), React.createElement("section", null, React.createElement("h1", null, "From Container"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": containerMessageProps }))), React.createElement("section", null, React.createElement("h1", null, "From Url Params"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": idProps }))), React.createElement("section", null, React.createElement("h1", null, "Child State"), React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": messageProps })))));
-        }
-    }]);
-
-    return SpaChild;
-})(React.Component);
-
-exports.default = SpaChild;
-
-},{"./MessageArea":407,"react":302}],409:[function(require,module,exports){
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var React = _interopRequireWildcard(_react);
-
-var _reactRouter = require('react-router');
-
-var _MessageArea = require('./MessageArea');
-
-var _MessageArea2 = _interopRequireDefault(_MessageArea);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SpaContainer = (function (_React$Component) {
-    _inherits(SpaContainer, _React$Component);
-
-    function SpaContainer(props) {
-        _classCallCheck(this, SpaContainer);
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpaContainer).call(this, props));
-
-        _this.handleClick = _this.handleClick.bind(_this);
-        _this.handleChangeClick = _this.handleChangeClick.bind(_this);
-        return _this;
-    }
-
-    _createClass(SpaContainer, [{
-        key: 'handleClick',
-        value: function handleClick(event) {
-            event.preventDefault();
-            this.props.pushState(null, '/parent/child/custom');
-            //if not connect actions to props
-            // const { dispatch } = this.props;
-            // dispatch(pushState(null, '/parent/child/custom'));
-        }
-    }, {
-        key: 'handleChangeClick',
-        value: function handleChangeClick(event) {
-            event.preventDefault();
-            this.props.changeMessage(this.refs["message"].value);
-            //if not connect actions to props
-            // const { dispatch } = this.props;
-            //dispatch(IndexActions.changeMessage({ text: "test", type: "error" }));
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var links = ['/', '/parent?foo=bar', '/parent/child?bar=baz', '/parent/child/123?baz=foo'].map(function (l, index) {
-                return React.createElement("li", null, React.createElement(_reactRouter.Link, { "to": l, "key": index }, l));
-            });
-            var message = this.props.message ? { type: "info", text: this.props.message } : { type: "error", text: "no message" };
-            return React.createElement("div", null, React.createElement("h1", null, "App Container"), React.createElement("div", { "className": "side-contents" }, React.createElement("ul", { "className": "links list" }, links, React.createElement("li", null, React.createElement("a", { "href": "#", "onClick": this.handleClick }, "/parent/child/custom")))), React.createElement("div", { "className": "main-contents" }, React.createElement("section", null, React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": message })))), React.createElement("section", null, this.props.children)));
-        }
-    }]);
-
-    return SpaContainer;
-})(React.Component);
-
-exports.default = SpaContainer;
-
-},{"./MessageArea":407,"react":302,"react-router":169}],410:[function(require,module,exports){
+},{"react":302}],413:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -31269,28 +31463,28 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SpaParent = (function (_React$Component) {
-    _inherits(SpaParent, _React$Component);
+var UrlUnMatch = (function (_React$Component) {
+    _inherits(UrlUnMatch, _React$Component);
 
-    function SpaParent() {
-        _classCallCheck(this, SpaParent);
+    function UrlUnMatch() {
+        _classCallCheck(this, UrlUnMatch);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(SpaParent).apply(this, arguments));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(UrlUnMatch).apply(this, arguments));
     }
 
-    _createClass(SpaParent, [{
+    _createClass(UrlUnMatch, [{
         key: "render",
         value: function render() {
-            return React.createElement("section", null, React.createElement("h2", null, "Parent"), this.props.children);
+            return React.createElement("div", null, React.createElement("h1", null, "Url Unmatch"), React.createElement("div", null, "not found."));
         }
     }]);
 
-    return SpaParent;
+    return UrlUnMatch;
 })(React.Component);
 
-exports.default = SpaParent;
+exports.default = UrlUnMatch;
 
-},{"react":302}],411:[function(require,module,exports){
+},{"react":302}],414:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31302,7 +31496,7 @@ var _redux = require('redux');
 
 var Redux = _interopRequireWildcard(_redux);
 
-var _SpaChildActions = require('../actions/SpaChildActions');
+var _BasicChildActions = require('../actions/BasicChildActions');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31312,7 +31506,7 @@ function message() {
     var action = arguments[1];
 
     switch (action.type) {
-        case _SpaChildActions.SpaChildActionTypes.CHANGE_MESSAGE:
+        case _BasicChildActions.BasicChildActionTypes.CHANGE_MESSAGE:
             return action.message;
         default:
             return state;
@@ -31321,7 +31515,7 @@ function message() {
 var Reducer = exports.Reducer = Redux.combineReducers({ message: message });
 exports.default = Reducer;
 
-},{"../actions/SpaChildActions":401,"redux":390}],412:[function(require,module,exports){
+},{"../actions/BasicChildActions":401,"redux":390}],415:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31333,7 +31527,7 @@ var _redux = require('redux');
 
 var Redux = _interopRequireWildcard(_redux);
 
-var _SpaContainerActions = require('../actions/SpaContainerActions');
+var _BasicParentActions = require('../actions/BasicParentActions');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31343,7 +31537,7 @@ function message() {
     var action = arguments[1];
 
     switch (action.type) {
-        case _SpaContainerActions.SpaContainerActionTypes.CHANGE_MESSAGE:
+        case _BasicParentActions.BasicParentActionTypes.CHANGE_MESSAGE:
             return action.message;
         default:
             return state;
@@ -31352,7 +31546,68 @@ function message() {
 var Reducer = exports.Reducer = Redux.combineReducers({ message: message });
 exports.default = Reducer;
 
-},{"../actions/SpaContainerActions":402,"redux":390}],413:[function(require,module,exports){
+},{"../actions/BasicParentActions":402,"redux":390}],416:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Reducer = undefined;
+
+var _redux = require('redux');
+
+var Redux = _interopRequireWildcard(_redux);
+
+var _ListDetailParentActions = require('../actions/ListDetailParentActions');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _getinitialItems() {
+    return [{ id: "0001", name: "item-0001" }, { id: "0002", name: "item-0002" }, { id: "0003", name: "item-0003" }, { id: "0004", name: "item-0004" }, { id: "0005", name: "item-0005" }];
+}
+//reducer
+function selectedId() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _ListDetailParentActions.ListDetailParentActionTypes.SELECT:
+            return action.id;
+        default:
+            return state;
+    }
+}
+function items() {
+    var state = arguments.length <= 0 || arguments[0] === undefined ? _getinitialItems() : arguments[0];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _ListDetailParentActions.ListDetailParentActionTypes.ADD:
+            var items = [];
+            items.concat(state);
+            items.push(action.item);
+            return items;
+        case _ListDetailParentActions.ListDetailParentActionTypes.UPDATE:
+            return state.map(function (x) {
+                if (x.id == action.item.id) {
+                    return action.item;
+                }
+                return x;
+            });
+        case _ListDetailParentActions.ListDetailParentActionTypes.REMOVE:
+            return state.filter(function (x) {
+                return x.id != action.id;
+            });
+        case _ListDetailParentActions.ListDetailParentActionTypes.RELOAD:
+            return _getinitialItems();
+        default:
+            return state;
+    }
+}
+var Reducer = exports.Reducer = Redux.combineReducers({ selectedId: selectedId, items: items });
+exports.default = Reducer;
+
+},{"../actions/ListDetailParentActions":403,"redux":390}],417:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31462,4 +31717,4 @@ export function Make(reducer: Reducer, initialState: any, ...storeComponents: Fu
 }
 */
 
-},{"history":110,"redux":390,"redux-devtools":305,"redux-router":365,"redux-router/server":387,"redux-thunk":388}]},{},[403]);
+},{"history":110,"redux":390,"redux-devtools":305,"redux-router":365,"redux-router/server":387,"redux-thunk":388}]},{},[404]);

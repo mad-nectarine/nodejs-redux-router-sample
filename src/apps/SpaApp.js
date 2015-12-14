@@ -24,37 +24,53 @@ var _DefaultLayout = require('../components/layouts/DefaultLayout');
 
 var _DefaultLayout2 = _interopRequireDefault(_DefaultLayout);
 
-var _SpaContainerActions = require('../actions/SpaContainerActions');
+var _AppContainer = require('../components/views/AppContainer');
 
-var SpaContainerActions = _interopRequireWildcard(_SpaContainerActions);
+var _AppContainer2 = _interopRequireDefault(_AppContainer);
 
-var _SpaChildActions = require('../actions/SpaChildActions');
+var _UrlUnMatch = require('../components/views/UrlUnMatch');
 
-var SpaChildActions = _interopRequireWildcard(_SpaChildActions);
-
-var _SpaContainer = require('../components/views/SpaContainer');
-
-var _SpaContainer2 = _interopRequireDefault(_SpaContainer);
-
-var _SpaContainerReducer = require('../reducers/SpaContainerReducer');
-
-var _SpaContainerReducer2 = _interopRequireDefault(_SpaContainerReducer);
-
-var _SpaChildReducer = require('../reducers/SpaChildReducer');
-
-var _SpaChildReducer2 = _interopRequireDefault(_SpaChildReducer);
-
-var _SpaParent = require('../components/views/SpaParent');
-
-var _SpaParent2 = _interopRequireDefault(_SpaParent);
-
-var _SpaChild = require('../components/views/SpaChild');
-
-var _SpaChild2 = _interopRequireDefault(_SpaChild);
+var _UrlUnMatch2 = _interopRequireDefault(_UrlUnMatch);
 
 var _StoreFactory = require('../util/StoreFactory');
 
 var StoreFactory = _interopRequireWildcard(_StoreFactory);
+
+var _BasicParent = require('../components/views/BasicParent');
+
+var _BasicParent2 = _interopRequireDefault(_BasicParent);
+
+var _BasicParentActions = require('../actions/BasicParentActions');
+
+var BasicParentActions = _interopRequireWildcard(_BasicParentActions);
+
+var _BasicParentReducer = require('../reducers/BasicParentReducer');
+
+var _BasicParentReducer2 = _interopRequireDefault(_BasicParentReducer);
+
+var _BasicChild = require('../components/views/BasicChild');
+
+var _BasicChild2 = _interopRequireDefault(_BasicChild);
+
+var _BasicChildActions = require('../actions/BasicChildActions');
+
+var BasicChildActions = _interopRequireWildcard(_BasicChildActions);
+
+var _BasicChildReducer = require('../reducers/BasicChildReducer');
+
+var _BasicChildReducer2 = _interopRequireDefault(_BasicChildReducer);
+
+var _ListDetailParent = require('../components/views/ListDetailParent');
+
+var _ListDetailParent2 = _interopRequireDefault(_ListDetailParent);
+
+var _ListDetailParentActions = require('../actions/ListDetailParentActions');
+
+var ListDetailParentActions = _interopRequireWildcard(_ListDetailParentActions);
+
+var _ListDetailParentReducer = require('../reducers/ListDetailParentReducer');
+
+var _ListDetailParentReducer2 = _interopRequireDefault(_ListDetailParentReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74,40 +90,59 @@ var pushState = _require.pushState;
 
 //====== bind state and action to components props ======
 var components = {
-    /* bind SpaContainer */
-    SpaContainer: (0, _reactRedux.connect)(function (state) {
+    /* bind AppContainer */
+    AppContainer: (0, _reactRedux.connect)(function (state) {
+        return {};
+    }, function (dispatch) {
+        return (0, _redux.bindActionCreators)({ pushState: pushState }, dispatch);
+    })(_AppContainer2.default),
+    /* bind BasicParent */
+    BasicParent: (0, _reactRedux.connect)(function (state) {
         return {
-            message: state.container.message
+            message: state.basicParent.message
         };
     }, function (dispatch) {
         //merge actions
         var actions = {
             pushState: pushState //"pushState" is a function,so you must set as a property. 
         };
-        Object.assign(actions, SpaContainerActions);
+        Object.assign(actions, BasicParentActions);
         //you can merge more actions
         //Object.assign(actions, hogeActionCreator, fugaActionCreator);
         //bind actions to dispatcher
         return (0, _redux.bindActionCreators)(actions, dispatch);
-    })(_SpaContainer2.default),
-    /* bind SpaChild */
-    SpaChild: (0, _reactRedux.connect)(function (state) {
+    })(_BasicParent2.default),
+    /* bind BasicChild */
+    BasicChild: (0, _reactRedux.connect)(function (state) {
         return {
-            message: state.child.message,
-            containerMessage: state.container.message
+            message: state.basicChild.message,
+            parentMessage: state.basicParent.message
         };
     }, function (dispatch) {
         //merge actions
         var actions = { pushState: pushState };
-        Object.assign(actions, SpaChildActions);
+        Object.assign(actions, BasicChildActions);
         return (0, _redux.bindActionCreators)(actions, dispatch);
-    })(_SpaChild2.default)
+    })(_BasicChild2.default),
+    /* bind BasicChild */
+    ListDetailParent: (0, _reactRedux.connect)(function (state) {
+        return {
+            selectedId: state.listDetailParent.selectedId,
+            items: state.listDetailParent.items
+        };
+    }, function (dispatch) {
+        //merge actions
+        var actions = { pushState: pushState };
+        Object.assign(actions, ListDetailParentActions);
+        return (0, _redux.bindActionCreators)(actions, dispatch);
+    })(_ListDetailParent2.default)
 };
 //====== create store functions ======
 function CreateServerStore(initialState, isDevelopment) {
     var reducer = {
-        container: _SpaContainerReducer2.default,
-        child: _SpaChildReducer2.default
+        basicParent: _BasicParentReducer2.default,
+        basicChild: _BasicChildReducer2.default,
+        listDetailParent: _ListDetailParentReducer2.default
     };
     //create store
     var store = StoreFactory.RouterAppServerDefault(getRoutes(), reducer, initialState, isDevelopment);
@@ -115,8 +150,9 @@ function CreateServerStore(initialState, isDevelopment) {
 }
 function CreateClientStore(initialState, isDevelopment) {
     var reducer = {
-        container: _SpaContainerReducer2.default,
-        child: _SpaChildReducer2.default
+        basicParent: _BasicParentReducer2.default,
+        basicChild: _BasicChildReducer2.default,
+        listDetailParent: _ListDetailParentReducer2.default
     };
     //create store
     var store = StoreFactory.RouterAppClientDefault(reducer, initialState, isDevelopment);
@@ -124,7 +160,7 @@ function CreateClientStore(initialState, isDevelopment) {
 }
 //====== app component ======
 function getRoutes() {
-    return React.createElement(_reactRouter.Route, { "path": "/", "component": components.SpaContainer }, React.createElement(_reactRouter.Route, { "path": "parent", "component": _SpaParent2.default }, React.createElement(_reactRouter.Route, { "path": "child", "component": components.SpaChild }), React.createElement(_reactRouter.Route, { "path": "child/:id", "component": components.SpaChild })));
+    return React.createElement(_reactRouter.Route, { "path": "/", "component": components.AppContainer }, React.createElement(_reactRouter.Route, { "path": "basic/parent", "component": components.BasicParent }, React.createElement(_reactRouter.Route, { "path": "child", "component": components.BasicChild }), React.createElement(_reactRouter.Route, { "path": "child/:id", "component": components.BasicChild })), React.createElement(_reactRouter.Route, { "path": "list", "component": components.ListDetailParent }), React.createElement(_reactRouter.Route, { "path": "*", "component": _UrlUnMatch2.default, "status": 404 }));
 }
 
 var SpaApp = exports.SpaApp = (function (_React$Component) {

@@ -1,10 +1,10 @@
 import * as Redux from 'redux';
-import { SpaChildActionTypes } from '../actions/SpaChildActions';
+import { BasicChildActionTypes } from '../actions/BasicChildActions';
 
 //reducer
 function message(state:string = "", action){
 	switch (action.type) {
-		case SpaChildActionTypes.CHANGE_MESSAGE:
+		case BasicChildActionTypes.CHANGE_MESSAGE:
 			return action.message
 		default:
 			return state

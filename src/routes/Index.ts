@@ -8,8 +8,8 @@ var router = express.Router();
 router.get('/*', function(req: express.Request, res: express.Response, next: Function) {
    
     let initialState = {
-        container: { message: "init contaier msg on server" },
-        child: { message: "init child msg on server" },
+        baseParent: { message: "init contaier msg on server" },
+        baseChild: { message: "init child msg on server" },
     }
     let store = App.CreateServerStore(initialState,true)
     const location = createLocation(req.url)

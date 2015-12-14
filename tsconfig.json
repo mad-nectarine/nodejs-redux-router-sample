@@ -67,11 +67,13 @@
     "./Scripts/typings/serve-static/serve-static.d.ts",
     "./Scripts/typings/superagent/superagent.d.ts",
     "./Scripts/typings/tsd.d.ts",
-    "./src/actions/SpaChildActions.ts",
-    "./src/actions/SpaContainerActions.ts",
+    "./src/actions/BasicChildActions.ts",
+    "./src/actions/BasicParentActions.ts",
+    "./src/actions/ListDetailParentActions.ts",
     "./src/config/RoutesConfig.ts",
-    "./src/reducers/SpaChildReducer.ts",
-    "./src/reducers/SpaContainerReducer.ts",
+    "./src/reducers/BasicChildReducer.ts",
+    "./src/reducers/BasicParentReducer.ts",
+    "./src/reducers/ListDetailParentReducer.ts",
     "./src/routes/Index.ts",
     "./src/util/StoreFactory.ts",
     "./src/app_endpoints/error.server.tsx",
@@ -82,9 +84,11 @@
     "./src/components/layouts/PlainFullPageLayout.tsx",
     "./src/components/layouts/ReduxFullPageLayout.tsx",
     "./src/components/layouts/ReduxProviderLayout.tsx",
+    "./src/components/views/AppContainer.tsx",
+    "./src/components/views/BasicChild.tsx",
+    "./src/components/views/BasicParent.tsx",
+    "./src/components/views/ListDetailParent.tsx",
     "./src/components/views/MessageArea.tsx",
-    "./src/components/views/SpaChild.tsx",
-    "./src/components/views/SpaContainer.tsx",
-    "./src/components/views/SpaParent.tsx"
+    "./src/components/views/UrlUnMatch.tsx"
   ]
 }

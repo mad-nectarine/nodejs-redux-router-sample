@@ -1,17 +1,16 @@
 // == import installed modules ==
 import * as React from 'react'
-import { Link } from 'react-router';
 // == import application modules ==
-import * as SpaChildActions from '../../actions/SpaChildActions'
+import * as BasicChildActions from '../../actions/BasicChildActions'
 import MessageArea from './MessageArea'
 
-export interface SpaChildProps extends SpaChildActions.SpaChildActionApi {
+export interface BasicChildProps extends BasicChildActions.BasicChildActionApi {
   message?: string,
-  containerMessage?: string
+  parentMessage?: string
   params?: { id: string }
 }
 
-export default class SpaChild extends React.Component<SpaChildProps, any> {
+export default class BasicChild extends React.Component<BasicChildProps, any> {
   constructor(props) {
     super(props)
     this.handleChangeClick = this.handleChangeClick.bind(this)
@@ -29,14 +28,14 @@ export default class SpaChild extends React.Component<SpaChildProps, any> {
     //get values from props
     const {
       message,
-      containerMessage,
+      parentMessage,
       params: { id }, //from url by router
     } = this.props;
     
     //create elements
-    let containerMessageProps = containerMessage ?
-      { type: "info", text: "id:" + containerMessage } :
-      { type: "error", text: "no container message" }
+    let parentMessageProps = parentMessage ?
+      { type: "info", text: "id:" + parentMessage } :
+      { type: "error", text: "no parent message" }
     let idProps = id ?
       { type: "info", text: "id:" + id } :
       { type: "error", text: "no id" }
@@ -48,9 +47,9 @@ export default class SpaChild extends React.Component<SpaChildProps, any> {
       <section>
         <h1>Child</h1>
         <section>
-          <h1>From Container</h1>
+          <h1>From Parent</h1>
           <p>
-            <MessageArea message={containerMessageProps} />
+            <MessageArea message={parentMessageProps} />
             </p>
           </section>
         <section>

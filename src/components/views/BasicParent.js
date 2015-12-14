@@ -24,19 +24,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SpaChild = (function (_React$Component) {
-    _inherits(SpaChild, _React$Component);
+var BasicParent = (function (_React$Component) {
+    _inherits(BasicParent, _React$Component);
 
-    function SpaChild(props) {
-        _classCallCheck(this, SpaChild);
+    function BasicParent(props) {
+        _classCallCheck(this, BasicParent);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpaChild).call(this, props));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BasicParent).call(this, props));
 
         _this.handleChangeClick = _this.handleChangeClick.bind(_this);
         return _this;
     }
 
-    _createClass(SpaChild, [{
+    _createClass(BasicParent, [{
         key: 'handleChangeClick',
         value: function handleChangeClick(event) {
             event.preventDefault();
@@ -49,20 +49,15 @@ var SpaChild = (function (_React$Component) {
         key: 'render',
         value: function render() {
             //get values from props
-            var _props = this.props;
-            var message = _props.message;
-            var containerMessage = _props.containerMessage;
-            var id = _props.params.id;
+            var message = this.props.message;
             //create elements
 
-            var containerMessageProps = containerMessage ? { type: "info", text: "id:" + containerMessage } : { type: "error", text: "no container message" };
-            var idProps = id ? { type: "info", text: "id:" + id } : { type: "error", text: "no id" };
             var messageProps = message ? { type: "info", text: message } : { type: "error", text: "no message" };
-            return React.createElement("section", null, React.createElement("h1", null, "Child"), React.createElement("section", null, React.createElement("h1", null, "From Container"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": containerMessageProps }))), React.createElement("section", null, React.createElement("h1", null, "From Url Params"), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": idProps }))), React.createElement("section", null, React.createElement("h1", null, "Child State"), React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": messageProps })))));
+            return React.createElement("section", null, React.createElement("h2", null, "Parent"), React.createElement("section", null, React.createElement("div", { "className": "input-form" }, React.createElement("h1", null, "Message"), React.createElement("p", null, React.createElement("input", { "type": "text", "ref": "message" }), React.createElement("input", { "type": "button", "value": "Change", "onClick": this.handleChangeClick })), React.createElement("p", null, React.createElement(_MessageArea2.default, { "message": messageProps })))), this.props.children);
         }
     }]);
 
-    return SpaChild;
+    return BasicParent;
 })(React.Component);
 
-exports.default = SpaChild;
+exports.default = BasicParent;

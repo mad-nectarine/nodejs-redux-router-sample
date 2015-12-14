@@ -22,8 +22,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/*', function (req, res, next) {
     var initialState = {
-        container: { message: "init contaier msg on server" },
-        child: { message: "init child msg on server" }
+        baseParent: { message: "init contaier msg on server" },
+        baseChild: { message: "init child msg on server" }
     };
     var store = App.CreateServerStore(initialState, true);
     var location = (0, _history.createLocation)(req.url);

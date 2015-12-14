@@ -18,23 +18,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SpaParent = (function (_React$Component) {
-    _inherits(SpaParent, _React$Component);
+var UrlUnMatch = (function (_React$Component) {
+    _inherits(UrlUnMatch, _React$Component);
 
-    function SpaParent() {
-        _classCallCheck(this, SpaParent);
+    function UrlUnMatch() {
+        _classCallCheck(this, UrlUnMatch);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(SpaParent).apply(this, arguments));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(UrlUnMatch).apply(this, arguments));
     }
 
-    _createClass(SpaParent, [{
+    _createClass(UrlUnMatch, [{
         key: "render",
         value: function render() {
-            return React.createElement("section", null, React.createElement("h2", null, "Parent"), this.props.children);
+            return React.createElement("div", null, React.createElement("h1", null, "Url Unmatch"), React.createElement("div", null, "not found."));
         }
     }]);
 
-    return SpaParent;
+    return UrlUnMatch;
 })(React.Component);
 
-exports.default = SpaParent;
+exports.default = UrlUnMatch;

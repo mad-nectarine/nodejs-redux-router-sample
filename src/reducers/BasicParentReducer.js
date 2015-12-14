@@ -9,7 +9,7 @@ var _redux = require('redux');
 
 var Redux = _interopRequireWildcard(_redux);
 
-var _SpaContainerActions = require('../actions/SpaContainerActions');
+var _BasicParentActions = require('../actions/BasicParentActions');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -19,7 +19,7 @@ function message() {
     var action = arguments[1];
 
     switch (action.type) {
-        case _SpaContainerActions.SpaContainerActionTypes.CHANGE_MESSAGE:
+        case _BasicParentActions.BasicParentActionTypes.CHANGE_MESSAGE:
             return action.message;
         default:
             return state;

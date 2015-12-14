@@ -5,14 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.changeMessage = changeMessage;
 //types
-var SpaChildActionTypes = exports.SpaChildActionTypes = {
-    CHANGE_MESSAGE: "CHILD.CHANGE_MESSAGE"
+var BasicChildActionTypes = exports.BasicChildActionTypes = {
+    CHANGE_MESSAGE: "BASIC_CHILD.CHANGE_MESSAGE"
 };
 //creators
 function changeMessage(message) {
     return {
-        type: SpaChildActionTypes.CHANGE_MESSAGE,
+        type: BasicChildActionTypes.CHANGE_MESSAGE,
         message: message
     };
 }
-;
