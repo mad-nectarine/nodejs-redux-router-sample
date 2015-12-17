@@ -12,6 +12,7 @@ import * as fs from 'fs';
 import routesConfig from './src/config/routesconfig';
 
 var app = express();
+global["rootDir"] = path.resolve(__dirname)
 
 //===== view engine setup =====
 app.set('views', __dirname + '/src/app_endpoints');

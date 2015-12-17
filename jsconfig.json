@@ -21,7 +21,7 @@
     "./app.js",
     "./src/actions/BasicChildActions.js",
     "./src/actions/BasicParentActions.js",
-    "./src/actions/ListDetailParentActions.js",
+    "./src/actions/ListDetailActions.js",
     "./src/app_endpoints/error.server.js",
     "./src/app_endpoints/Spa.client.js",
     "./src/app_endpoints/Spa.server.js",
@@ -33,14 +33,17 @@
     "./src/components/views/AppContainer.js",
     "./src/components/views/BasicChild.js",
     "./src/components/views/BasicParent.js",
+    "./src/components/views/ListDetailChild.js",
     "./src/components/views/ListDetailParent.js",
     "./src/components/views/MessageArea.js",
     "./src/components/views/UrlUnmatch.js",
     "./src/config/RoutesConfig.js",
     "./src/reducers/BasicChildReducer.js",
     "./src/reducers/BasicParentReducer.js",
-    "./src/reducers/ListDetailParentReducer.js",
+    "./src/reducers/ListDetailReducer.js",
+    "./src/routes/Data.js",
     "./src/routes/Index.js",
+    "./src/util/ActionStateConnector.js",
     "./src/util/StoreFactory.js"
   ]
 }

@@ -33,6 +33,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
 var app = express();
+global["rootDir"] = path.resolve(__dirname);
 //===== view engine setup =====
 app.set('views', __dirname + '/src/app_endpoints');
 app.set('view engine', 'server.js');

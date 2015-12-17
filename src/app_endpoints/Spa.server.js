@@ -40,12 +40,7 @@ var Spa = (function (_React$Component) {
     _createClass(Spa, [{
         key: 'render',
         value: function render() {
-            // let initialState = {
-            // 	app: { message:"init" }
-            // };
-            //let isDevelopment = process.env.NODE_ENV == "development";
-            //let store = App.CreateServerStore(initialState, isDevelopment);
-            return React.createElement(_ReduxFullPageLayout2.default, { "title": this.props.title, "pageName": "spa", "store": this.props.store, "isDevelopment": true }, React.createElement(App.SpaApp, { "title": this.props.title }));
+            return React.createElement(_ReduxFullPageLayout2.default, { "title": this.props.title, "pageName": "spa", "store": this.props.store, "isDevelopment": this.props.isDevelopment }, React.createElement(App.SpaApp, { "title": this.props.title }));
         }
     }]);
 

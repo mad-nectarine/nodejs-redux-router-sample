@@ -4,24 +4,19 @@ import * as App from '../apps/SpaApp'
 
 export interface SpaProps {
 	title: string,
-	store: any
+	store: any,
+	isDevelopment: boolean
 }
 
 export default class Spa extends React.Component<SpaProps, any>
 {	
 	render() { 
-		// let initialState = {
-		// 	app: { message:"init" }
-		// };
-		//let isDevelopment = process.env.NODE_ENV == "development";
-		//let store = App.CreateServerStore(initialState, isDevelopment);
-		
 		return (
 		<ReduxFullPageLayout
 			title={this.props.title}
 			pageName="spa"
 			store={this.props.store}
-			isDevelopment={true}>
+			isDevelopment={this.props.isDevelopment}>
 			<App.SpaApp title={this.props.title} />
 			</ReduxFullPageLayout>);
 	}

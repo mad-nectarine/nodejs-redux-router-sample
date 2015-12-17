@@ -55,6 +55,14 @@ button {
     color: white;
     padding: 4px 15px;
     font-size: 1.2em;
+    cursor: pointer;
+}
+
+input[type=button]:disabled,
+input[type=submit]:disabled,
+button:disabled{
+    opacity: 0.5;
+    cursor: default;
 }
 
 input[type=text] {
@@ -101,9 +109,9 @@ select {
         margin-bottom: 0;
     }
 
-        .input-form .operations input[type=button],
-        .input-form .operations input[type=submit],
-        .input-form .operations button {
+        .operations input[type=button],
+        .operations input[type=submit],
+        .operations button {
             margin-right: 10px;
         }
 
@@ -133,16 +141,9 @@ ul.list {
             cursor: default;
         }
         
-        ul.list li:not(.unselectable):hover:before
+        ul.list li:not(.unselectable):hover
         {
-            position:absolute;
-            content: "▶";
-            display: inline-block;
-            top:50%;
-            left: 0;
-            margin-top: -10px;
-            font-size: 20px;
-            line-height: 20px;
+            text-decoration: underline;
         }
         
         ul.list li.selected {

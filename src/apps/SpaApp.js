@@ -64,13 +64,17 @@ var _ListDetailParent = require('../components/views/ListDetailParent');
 
 var _ListDetailParent2 = _interopRequireDefault(_ListDetailParent);
 
-var _ListDetailParentActions = require('../actions/ListDetailParentActions');
+var _ListDetailChild = require('../components/views/ListDetailChild');
 
-var ListDetailParentActions = _interopRequireWildcard(_ListDetailParentActions);
+var _ListDetailChild2 = _interopRequireDefault(_ListDetailChild);
 
-var _ListDetailParentReducer = require('../reducers/ListDetailParentReducer');
+var _ListDetailActions = require('../actions/ListDetailActions');
 
-var _ListDetailParentReducer2 = _interopRequireDefault(_ListDetailParentReducer);
+var ListDetailActions = _interopRequireWildcard(_ListDetailActions);
+
+var _ListDetailReducer = require('../reducers/ListDetailReducer');
+
+var _ListDetailReducer2 = _interopRequireDefault(_ListDetailReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -124,25 +128,48 @@ var components = {
         Object.assign(actions, BasicChildActions);
         return (0, _redux.bindActionCreators)(actions, dispatch);
     })(_BasicChild2.default),
-    /* bind BasicChild */
+    /* bind ListDetailParent */
     ListDetailParent: (0, _reactRedux.connect)(function (state) {
         return {
-            selectedId: state.listDetailParent.selectedId,
-            items: state.listDetailParent.items
+            selectedId: state.listDetail.selectedId,
+            items: state.listDetail.items,
+            message: state.listDetail.message,
+            mode: state.listDetail.mode,
+            inputItem: state.listDetail.inputItem
         };
     }, function (dispatch) {
         //merge actions
         var actions = { pushState: pushState };
-        Object.assign(actions, ListDetailParentActions);
+        Object.assign(actions, ListDetailActions);
         return (0, _redux.bindActionCreators)(actions, dispatch);
-    })(_ListDetailParent2.default)
+    })(_ListDetailParent2.default),
+    /* bind ListDetailChild */
+    ListDetailChild: (0, _reactRedux.connect)(function (state) {
+        return {
+            selectedId: state.listDetail.selectedId,
+            items: state.listDetail.items,
+            message: state.listDetail.message,
+            mode: state.listDetail.mode,
+            inputItem: state.listDetail.inputItem
+        };
+    }, function (dispatch) {
+        //merge actions
+        var actions = { pushState: pushState };
+        Object.assign(actions, ListDetailActions);
+        return (0, _redux.bindActionCreators)(actions, dispatch);
+    })(_ListDetailChild2.default)
 };
+//====== connect action and state ======
+//ListDetailActions.StateConnector.connect("listDetail")
+ListDetailActions.StateConnector.connect(function (state) {
+    return state.listDetail;
+});
 //====== create store functions ======
 function CreateServerStore(initialState, isDevelopment) {
     var reducer = {
         basicParent: _BasicParentReducer2.default,
         basicChild: _BasicChildReducer2.default,
-        listDetailParent: _ListDetailParentReducer2.default
+        listDetail: _ListDetailReducer2.default
     };
     //create store
     var store = StoreFactory.RouterAppServerDefault(getRoutes(), reducer, initialState, isDevelopment);
@@ -152,7 +179,7 @@ function CreateClientStore(initialState, isDevelopment) {
     var reducer = {
         basicParent: _BasicParentReducer2.default,
         basicChild: _BasicChildReducer2.default,
-        listDetailParent: _ListDetailParentReducer2.default
+        listDetail: _ListDetailReducer2.default
     };
     //create store
     var store = StoreFactory.RouterAppClientDefault(reducer, initialState, isDevelopment);
@@ -160,7 +187,7 @@ function CreateClientStore(initialState, isDevelopment) {
 }
 //====== app component ======
 function getRoutes() {
-    return React.createElement(_reactRouter.Route, { "path": "/", "component": components.AppContainer }, React.createElement(_reactRouter.Route, { "path": "basic/parent", "component": components.BasicParent }, React.createElement(_reactRouter.Route, { "path": "child", "component": components.BasicChild }), React.createElement(_reactRouter.Route, { "path": "child/:id", "component": components.BasicChild })), React.createElement(_reactRouter.Route, { "path": "list", "component": components.ListDetailParent }), React.createElement(_reactRouter.Route, { "path": "*", "component": _UrlUnMatch2.default, "status": 404 }));
+    return React.createElement(_reactRouter.Route, { "path": "app", "component": components.AppContainer }, React.createElement(_reactRouter.Route, { "path": "basic/parent", "component": components.BasicParent }, React.createElement(_reactRouter.Route, { "path": "child", "component": components.BasicChild }), React.createElement(_reactRouter.Route, { "path": "child/:id", "component": components.BasicChild })), React.createElement(_reactRouter.Route, { "path": "list", "component": components.ListDetailParent }, React.createElement(_reactRouter.Route, { "path": "detail", "component": components.ListDetailChild })), React.createElement(_reactRouter.Route, { "path": "*", "component": _UrlUnMatch2.default, "status": 404 }));
 }
 
 var SpaApp = exports.SpaApp = (function (_React$Component) {

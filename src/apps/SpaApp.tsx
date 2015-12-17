@@ -9,6 +9,7 @@ import DefaultLayout from '../components/layouts/DefaultLayout'
 import AppContainer from '../components/views/AppContainer'
 import UrlUnMatch  from '../components/views/UrlUnMatch'
 import * as StoreFactory from '../util/StoreFactory'
+import * as ActionStateConnector from '../util/ActionStateConnector'
 //Basic
 import BasicParent from '../components/views/BasicParent'
 import * as BasicParentActions from '../actions/BasicParentActions'
@@ -18,8 +19,9 @@ import * as BasicChildActions from '../actions/BasicChildActions'
 import BasicChildReducer from '../reducers/BasicChildReducer'
 //ListDetail
 import ListDetailParent from '../components/views/ListDetailParent'
-import * as ListDetailParentActions from '../actions/ListDetailParentActions'
-import ListDetailParentReducer from '../reducers/ListDetailParentReducer'
+import ListDetailChild from '../components/views/ListDetailChild'
+import * as ListDetailActions from '../actions/ListDetailActions'
+import ListDetailReducer from '../reducers/ListDetailReducer'
 
 
 //====== bind state and action to components props ======
@@ -70,27 +72,54 @@ var components = {
             return bindActionCreators(actions, dispatch)
         })(BasicChild),
      
-     /* bind BasicChild */
+     /* bind ListDetailParent */
     ListDetailParent: connect(
         (state) => {
             return {
-                selectedId: state.listDetailParent.selectedId,
-                items: state.listDetailParent.items
+                selectedId: state.listDetail.selectedId,
+                items: state.listDetail.items,
+                message: state.listDetail.message,
+                mode: state.listDetail.mode,
+                inputItem: state.listDetail.inputItem
             }
         },
         (dispatch) => {
             //merge actions
             let actions = { pushState }
-            Object.assign(actions, ListDetailParentActions)
+            Object.assign(actions, ListDetailActions)
             return bindActionCreators(actions, dispatch)
         })(ListDetailParent),
+        
+     /* bind ListDetailChild */
+    ListDetailChild: connect(
+        (state) => {
+            return {
+                selectedId: state.listDetail.selectedId,
+                items: state.listDetail.items,
+                message: state.listDetail.message,
+                mode: state.listDetail.mode,
+                inputItem: state.listDetail.inputItem
+            }
+        },
+        (dispatch) => {
+            //merge actions
+            let actions = { pushState }
+            Object.assign(actions, ListDetailActions)
+            return bindActionCreators(actions, dispatch)
+        })(ListDetailChild),
 }
+//====== connect action and state ======
+//ListDetailActions.StateConnector.connect("listDetail")
+ListDetailActions.StateConnector.connect((state)=>{
+    return state.listDetail
+})
+
 //====== create store functions ======
 export function CreateServerStore(initialState: any, isDevelopment: boolean) {
     var reducer = {
         basicParent: BasicParentReducer,
         basicChild: BasicChildReducer,
-        listDetailParent: ListDetailParentReducer,
+        listDetail: ListDetailReducer,
     };
     //create store
     let store = StoreFactory.RouterAppServerDefault(getRoutes(), reducer, initialState, isDevelopment);
@@ -101,7 +130,7 @@ export function CreateClientStore(initialState: any, isDevelopment: boolean) {
     var reducer = {
         basicParent: BasicParentReducer,
         basicChild: BasicChildReducer,
-        listDetailParent: ListDetailParentReducer,
+        listDetail: ListDetailReducer,
     };
     //create store
     let store = StoreFactory.RouterAppClientDefault(reducer, initialState, isDevelopment);
@@ -110,14 +139,18 @@ export function CreateClientStore(initialState: any, isDevelopment: boolean) {
 
 //====== app component ======
 export function getRoutes() {
-    return (<Route path="/" component={components.AppContainer} >
+    return (<Route path="app" component={components.AppContainer} >
+                { /* Basic */ }
                 <Route path="basic/parent" component={components.BasicParent}>
                         <Route path="child" component={components.BasicChild} />
                         <Route path="child/:id" component={components.BasicChild} />
                     </Route>
-                { /* Catch all route */ }
+                { /* List & Detail */ }
                 <Route path="list" component={components.ListDetailParent}>
+                    <Route path="detail" component={components.ListDetailChild} />
                     </Route>
+                { /* Authentication */ }
+                { /* Catch all route */ }
                 <Route path="*" component={UrlUnMatch} status={404} />
         </Route>)
 }

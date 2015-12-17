@@ -19,7 +19,7 @@ export default class AppContainer extends React.Component<AppContainerProps, any
 
   handleClick(event) {
     event.preventDefault();
-    this.props.pushState(null, '/basic/parent/child/custom');
+    this.props.pushState(null, '/app/basic/parent/child/custom');
     
     //if not connect actions to props
     // const { dispatch } = this.props;
@@ -35,25 +35,24 @@ export default class AppContainer extends React.Component<AppContainerProps, any
             <li className="unselectable">
               <p>Basic</p>
               <ul>
-                <li><Link to="/basic/parent">/parent</Link></li>
-                <li><Link to="/basic/parent/child">/parent/child</Link></li>
-                <li><Link to="/basic/parent/child/123">/parent/child/123</Link></li>
+                <li><Link to="/app/basic/parent">/parent</Link></li>
+                <li><Link to="/app/basic/parent/child">/parent/child</Link></li>
+                <li><Link to="/app/basic/parent/child/123">/parent/child/123</Link></li>
                 <li><a href="#" onClick={this.handleClick}>/parent/child/custom(click) </a></li>
                 </ul>
               </li>
             <li className="unselectable">
               <p>List-Detail</p>
               <ul>
-                <li><Link to="/list">/</Link></li>
-                <li><Link to="/list/detail">/detail</Link></li>
-                <li><Link to="/list/detail/1">/detail/1</Link></li>
+                <li><Link to="/app/list">/</Link></li>
+                <li><Link to="/app/list/detail">/detail</Link></li>
                 </ul>
               </li>
             <li className="unselectable">
               <p>Authentication</p>
               <ul>
-                <li><Link to="/auth/login">{"/login"}</Link></li>
-                <li><Link to="/auth/needAuth">/needAuth</Link></li>
+                <li><Link to="/app/auth/login">{"/login"}</Link></li>
+                <li><Link to="/app/auth/needAuth">/needAuth</Link></li>
                 </ul>
               </li>
             </ul>

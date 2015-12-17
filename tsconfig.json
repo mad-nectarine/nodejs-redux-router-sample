@@ -10,7 +10,8 @@
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
     "jsx": "react",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "experimentalAsyncFunctions": true
   },
   "formatCodeOptions": {
     "indentSize": 4,
@@ -69,12 +70,14 @@
     "./Scripts/typings/tsd.d.ts",
     "./src/actions/BasicChildActions.ts",
     "./src/actions/BasicParentActions.ts",
-    "./src/actions/ListDetailParentActions.ts",
+    "./src/actions/ListDetailActions.ts",
     "./src/config/RoutesConfig.ts",
     "./src/reducers/BasicChildReducer.ts",
     "./src/reducers/BasicParentReducer.ts",
-    "./src/reducers/ListDetailParentReducer.ts",
+    "./src/reducers/ListDetailReducer.ts",
+    "./src/routes/Data.ts",
     "./src/routes/Index.ts",
+    "./src/util/ActionStateConnector.ts",
     "./src/util/StoreFactory.ts",
     "./src/app_endpoints/error.server.tsx",
     "./src/app_endpoints/Spa.client.tsx",
@@ -87,6 +90,7 @@
     "./src/components/views/AppContainer.tsx",
     "./src/components/views/BasicChild.tsx",
     "./src/components/views/BasicParent.tsx",
+    "./src/components/views/ListDetailChild.tsx",
     "./src/components/views/ListDetailParent.tsx",
     "./src/components/views/MessageArea.tsx",
     "./src/components/views/UrlUnMatch.tsx"

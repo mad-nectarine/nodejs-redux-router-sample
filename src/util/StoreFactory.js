@@ -18,6 +18,8 @@ var _history = require('history');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var _require = require('redux-router');
 
 var routerStateReducer = _require.routerStateReducer;
@@ -38,10 +40,25 @@ function RouterAppServerDefault(routes, reducers, initialState, hasDevTool) {
     var mergedReducer = (0, _redux.combineReducers)(reducer);
     //** set components **
     var finalCreateStore = undefined;
-    finalCreateStore = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);
+    //#1
     if (hasDevTool) {
-        finalCreateStore = (0, _reduxDevtools.devTools)()(finalCreateStore);
+        finalCreateStore = (0, _reduxDevtools.devTools)()(_redux.createStore);
+    } else {
+        finalCreateStore = _redux.createStore;
     }
+    //#2
+    // finalCreateStore = applyMiddleware(thunk)(createStore)
+    // if (hasDevTool) {
+    // 	finalCreateStore = devTools()(finalCreateStore)
+    // }
+    //#3
+    // let components = [ applyMiddleware(thunk) ]
+    // if (hasDevTool) {
+    // 	components = components.concat([
+    // 		devTools()
+    // 	])
+    // }
+    //finalCreateStore = compose(...components)(createStore)
     //** for redux-router / on server **
     //1. must use reduxReactRouter for server
     //2. routes is required -- ex: function getRoutes() { return (<Route path="/" component="hoge">....) }
@@ -62,11 +79,11 @@ function RouterAppClientDefault(reducers, initialState, hasDevTool) {
     var mergedReducer = (0, _redux.combineReducers)(reducer);
     //** set components **
     var finalCreateStore = undefined;
-    finalCreateStore = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);
+    var components = [(0, _redux.applyMiddleware)(_reduxThunk2.default)];
     if (hasDevTool) {
-        finalCreateStore = (0, _reduxDevtools.devTools)()(finalCreateStore);
-        finalCreateStore = (0, _reduxDevtools.persistState)(window.location.href.match(/[?&]debug_session=([^&]+)\b/))(finalCreateStore);
+        components = components.concat([(0, _reduxDevtools.devTools)(), (0, _reduxDevtools.persistState)(window.location.href.match(/[?&]debug_session=([^&]+)\b/))]);
     }
+    finalCreateStore = _redux.compose.apply(undefined, _toConsumableArray(components))(_redux.createStore);
     //** for redux-router / on client **
     //1. must use reduxReactRouter for client
     //2. you can use createHistory, only on client
