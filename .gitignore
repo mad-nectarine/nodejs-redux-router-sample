@@ -34,7 +34,10 @@ node_modules
 .node_repl_history
 
 # ignore typescript compiled js
-src/*/*.js
-app.js
-public/scripts/apps/*.js
-logs
+*.js
+
+# others
+
+
+#contains
+!gulpfile.js
