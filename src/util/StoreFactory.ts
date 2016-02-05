@@ -1,85 +1,133 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import thunk from 'redux-thunk'
-import { devTools, persistState } from 'redux-devtools'
+import * as thunk from 'redux-thunk'
+import { createDevTools, persistState } from 'redux-devtools'
 import { createHistory } from 'history'
-var { routerStateReducer, reduxReactRouter } = require('redux-router')
-var ReduxRouterServer = require('redux-router/server')
+import * as ReactRouter from 'react-router'
+import { syncHistory, routeReducer } from 'react-router-redux'
+
+//var { routerStateReducer, reduxReactRouter } = require('redux-router')
+//var ReduxRouterServer = require('redux-router/server')
+
+export function createForRouterAppOnServer(param: { history: any, reducers: any, initialState?: any }) {
+    const initialState = param.initialState || {};
+
+    //middleware
+    const middlewares = [
+        syncHistory(param.history),
+        thunk]
+    const middleware = applyMiddleware(...middlewares)
+    const finalCreateStore = middleware(createStore)
+
+    //reducer
+    const mergedReducer = combineReducers(Object.assign({ router: routeReducer }, param.reducers))
+
+    //create store
+    const store = finalCreateStore(mergedReducer, initialState)
+    return store
+}
+export function createForRouterAppOnClient(param: { history: any, reducers: any, initialState?: any , hasDevTool? : boolean }) {
+    const initialState = param.initialState || {};
+
+    //middleware
+    const middlewares = [
+        syncHistory(param.history),
+        thunk]
+    const middleware = applyMiddleware(...middlewares)
+    const finalCreateStore = middleware(createStore)
+    
+    if(param.hasDevTool){
+        //todo DevTool    
+    }
+
+    //reducer
+    const mergedReducer = combineReducers(Object.assign({ router: routeReducer }, param.reducers))
+
+    //create store
+    const store = finalCreateStore(mergedReducer, initialState)
+    return store
+}
+
+
+
+
+
+
 
 export function RouterAppServerDefault(routes: any, reducers: any, initialState: any, hasDevTool: boolean) {
-	//** initial state **
-	//initial state must not be "undefined"
-	//if it is, exception is thrown
-	initialState = initialState || {};
+    //** initial state **
+    //initial state must not be "undefined"
+    //if it is, exception is thrown
+    initialState = initialState || {};
 	
-	//** merge reducers **
-	//you must add reducer for redux-router
-	let reducer = {
-		router: routerStateReducer
-	}
-	Object.assign(reducer, reducers)
-	let mergedReducer = combineReducers(reducer)
+    //** merge reducers **
+    //you must add reducer for redux-router
+    let reducer = {
+        //	router: routerStateReducer
+    }
+    Object.assign(reducer, reducers)
+    let mergedReducer = combineReducers(reducer)
 	
-	//** set components **
-	let finalCreateStore;
-	//#1
-	if (hasDevTool) {
-		finalCreateStore = devTools()(createStore)
-	}
-	else{
-		finalCreateStore = createStore
-	}
-	//#2
-	// finalCreateStore = applyMiddleware(thunk)(createStore)
-	// if (hasDevTool) {
-	// 	finalCreateStore = devTools()(finalCreateStore)
-	// }
-	//#3
-	// let components = [ applyMiddleware(thunk) ]
-	// if (hasDevTool) {
-	// 	components = components.concat([
-	// 		devTools()
-	// 	])
-	// }
-	//finalCreateStore = compose(...components)(createStore)
+    //** set components **
+    let finalCreateStore;
+    //#1
+    if (hasDevTool) {
+        finalCreateStore = devTools()(createStore)
+    }
+    else {
+        finalCreateStore = createStore
+    }
+    //#2
+    // finalCreateStore = applyMiddleware(thunk)(createStore)
+    // if (hasDevTool) {
+    // 	finalCreateStore = devTools()(finalCreateStore)
+    // }
+    //#3
+    // let components = [ applyMiddleware(thunk) ]
+    // if (hasDevTool) {
+    // 	components = components.concat([
+    // 		devTools()
+    // 	])
+    // }
+    //finalCreateStore = compose(...components)(createStore)
 	
-	//** for redux-router / on server **
-	//1. must use reduxReactRouter for server
-	//2. routes is required -- ex: function getRoutes() { return (<Route path="/" component="hoge">....) }
-	finalCreateStore = ReduxRouterServer.reduxReactRouter({ routes })(finalCreateStore)
+    //** for redux-router / on server **
+    //1. must use reduxReactRouter for server
+    //2. routes is required -- ex: function getRoutes() { return (<Route path="/" component="hoge">....) }
+    //finalCreateStore = ReduxRouterServer.reduxReactRouter({ routes })(finalCreateStore)
 
-	return finalCreateStore(mergedReducer, initialState)
+    return finalCreateStore(mergedReducer, initialState)
 }
 export function RouterAppClientDefault(reducers: any, initialState: any, hasDevTool: boolean) {
-	//** initial state **
-	//initial state must not be "undefined"
-	//if it is, exception is thrown
-	initialState = initialState || {};
+    //** initial state **
+    //initial state must not be "undefined"
+    //if it is, exception is thrown
+    initialState = initialState || {};
 	
-	//** merge reducers **
-	//you must add reducer for redux-router
-	let reducer = {
-		router: routerStateReducer
-	}
-	Object.assign(reducer, reducers)
-	let mergedReducer = combineReducers(reducer)
+    //** merge reducers **
+    //you must add reducer for redux-router
+    let reducer = {
+        //router: routerStateReducer
+    }
+    Object.assign(reducer, reducers)
+    let mergedReducer = combineReducers(reducer)
 	
-	//** set components **
-	let finalCreateStore;
-	let components = [ applyMiddleware(thunk) ]
-	if (hasDevTool) {
-		components = components.concat([
-			devTools(),
-			persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-		])
-	}
-	finalCreateStore = compose(...components)(createStore)
+    //** set components **
+    let finalCreateStore;
+    let components = [applyMiddleware(thunk)]
+    // if (hasDevTool) {
+    // 	components = components.concat([
+    // 		devTools(),
+    // 		persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    // 	])
+    // }
+    finalCreateStore = compose(...components)(createStore)
 	
-	//** for redux-router / on client **
-	//1. must use reduxReactRouter for client
-	//2. you can use createHistory, only on client
-	finalCreateStore = reduxReactRouter({ createHistory })(finalCreateStore)
+    //** for redux-router / on client **
+    //1. must use reduxReactRouter for client
+    //2. you can use createHistory, only on client
+    //finalCreateStore = reduxReactRouter({ createHistory })(finalCreateStore)
 
-	return finalCreateStore(mergedReducer, initialState)
+    return finalCreateStore(mergedReducer, initialState)
 }
 
 

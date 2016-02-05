@@ -1,19 +1,7 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _express = require('express');
-
-var express = _interopRequireWildcard(_express);
-
-var _fs = require('fs');
-
-var fs = _interopRequireWildcard(_fs);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
+var express = require('express');
+var fs = require('fs');
 var router = express.Router();
 var __dataFilePath = global["rootDir"] + "/data/items.json";
 router.get('/list', function (req, res, next) {
@@ -138,5 +126,4 @@ router.post('/remove', function (req, res, next) {
     });
 });
 exports.default = router;
-
 module.exports = router;

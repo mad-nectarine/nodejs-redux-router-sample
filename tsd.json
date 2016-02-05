@@ -6,76 +6,79 @@
   "bundle": "Scripts/typings/tsd.d.ts",
   "installed": {
     "mime/mime.d.ts": {
-      "commit": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "serve-static/serve-static.d.ts": {
-      "commit": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "express/express.d.ts": {
-      "commit": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "node/node.d.ts": {
-      "commit": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "cookie-parser/cookie-parser.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "express-session/express-session.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "multer/multer.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "node-uuid/node-uuid-base.d.ts": {
-      "commit": "36c6ce86fb64bafb28ec95dc78c6b98228b45c8d"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "node-uuid/node-uuid.d.ts": {
-      "commit": "36c6ce86fb64bafb28ec95dc78c6b98228b45c8d"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "node-uuid/node-uuid-cjs.d.ts": {
-      "commit": "36c6ce86fb64bafb28ec95dc78c6b98228b45c8d"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "serve-favicon/serve-favicon.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "body-parser/body-parser.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "debug/debug.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "superagent/superagent.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "redux/redux.d.ts": {
-      "commit": "36c6ce86fb64bafb28ec95dc78c6b98228b45c8d"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "react-redux/react-redux.d.ts": {
-      "commit": "36c6ce86fb64bafb28ec95dc78c6b98228b45c8d"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "react/react.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "react/react-dom.d.ts": {
-      "commit": "ba424f7ee39717d51c17699a09ac8df312a7e9a1"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "redux-devtools/redux-devtools.d.ts": {
-      "commit": "ba424f7ee39717d51c17699a09ac8df312a7e9a1"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "redux-thunk/redux-thunk.d.ts": {
-      "commit": "ba424f7ee39717d51c17699a09ac8df312a7e9a1"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "morgan/morgan.d.ts": {
-      "commit": "e48f0c7a0a5f9e9d35e9cfd7506461bab435cb49"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
-    "history/history.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    "react-router-redux/react-router-redux.d.ts": {
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "react-router/history.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     },
     "react-router/react-router.d.ts": {
-      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
+    },
+    "history/history.d.ts": {
+      "commit": "e69fe60f2d6377ea4fae539493997b098f52cad1"
     }
   }
 }

@@ -5,7 +5,7 @@ export interface DefaultLayoutProps {
 	children? : React.ReactNode,
 }
 
-export default class DefaultLayout extends React.Component<DefaultLayoutProps, any>
+export class DefaultLayout extends React.Component<DefaultLayoutProps, any>
 {
 	render() {
 		return (
@@ -21,4 +21,4 @@ export default class DefaultLayout extends React.Component<DefaultLayoutProps, a
 		);
 	}
 }
-module.exports = DefaultLayout;
+export default DefaultLayout

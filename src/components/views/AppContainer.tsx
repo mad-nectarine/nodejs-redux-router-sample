@@ -10,7 +10,7 @@ export interface AppContainerProps {
   children?
 }
 
-export default class AppContainer extends React.Component<AppContainerProps, any> {
+export class AppContainer extends React.Component<AppContainerProps, any> {
 
   constructor(props) {
     super(props);
@@ -66,3 +66,4 @@ export default class AppContainer extends React.Component<AppContainerProps, any
     )
   }
 }
+export default AppContainer

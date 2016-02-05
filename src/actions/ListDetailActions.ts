@@ -1,5 +1,5 @@
 import * as superagent from 'superagent'
-import thunk from 'redux-thunk'
+import * as thunk from 'redux-thunk'
 
 //state connector
 import ActionStateConnector from '../util/ActionStateConnector'

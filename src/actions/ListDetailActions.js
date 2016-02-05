@@ -1,33 +1,11 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.ListDetailActionTypes = exports.StateConnector = undefined;
-exports.select = select;
-exports.add = add;
-exports.update = update;
-exports.remove = remove;
-exports.loadList = loadList;
-exports.changeMode = changeMode;
-exports.changeMessage = changeMessage;
-exports.changeInput = changeInput;
-
-var _superagent = require('superagent');
-
-var superagent = _interopRequireWildcard(_superagent);
-
-var _ActionStateConnector = require('../util/ActionStateConnector');
-
-var _ActionStateConnector2 = _interopRequireDefault(_ActionStateConnector);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var StateConnector = exports.StateConnector = (0, _ActionStateConnector2.default)();
+var superagent = require('superagent');
+//state connector
+var ActionStateConnector_1 = require('../util/ActionStateConnector');
+exports.StateConnector = ActionStateConnector_1.default();
 //types
-var ListDetailActionTypes = exports.ListDetailActionTypes = {
+exports.ListDetailActionTypes = {
     SELECT: "LISTDETAIL.SELECT",
     ADD: "LISTDETAIL.ADD",
     REMOVE: "LISTDETAIL.REMOVE",
@@ -41,16 +19,17 @@ var ListDetailActionTypes = exports.ListDetailActionTypes = {
 function select(id) {
     return function (dispatch, getState) {
         dispatch(changeMode(""));
-        var state = StateConnector.getOrOriginal(getState);
+        var state = exports.StateConnector.getOrOriginal(getState);
         var items = state.items;
         var filtered = items.filter(function (x) {
             return x.id == id;
         });
         var selectedItem = filtered.length > 0 ? filtered[0] : null;
-        dispatch({ type: ListDetailActionTypes.SELECT, id: id });
+        dispatch({ type: exports.ListDetailActionTypes.SELECT, id: id });
         dispatch(changeInput(selectedItem));
     };
 }
+exports.select = select;
 function add(item) {
     return function (dispatch, getState) {
         dispatch(changeMessage(null));
@@ -62,7 +41,7 @@ function add(item) {
             var result = JSON.parse(res.text);
             if (result.isSuccess) {
                 dispatch({
-                    type: ListDetailActionTypes.ADD,
+                    type: exports.ListDetailActionTypes.ADD,
                     item: item
                 });
                 dispatch(changeMessage({ type: "info", text: "save completed" }));
@@ -73,6 +52,7 @@ function add(item) {
         });
     };
 }
+exports.add = add;
 function update(item) {
     return function (dispatch, getState) {
         dispatch(changeMessage(null));
@@ -84,7 +64,7 @@ function update(item) {
             var result = JSON.parse(res.text);
             if (result.isSuccess) {
                 dispatch({
-                    type: ListDetailActionTypes.UPDATE,
+                    type: exports.ListDetailActionTypes.UPDATE,
                     item: item
                 });
                 dispatch(changeMessage({ type: "info", text: "save completed" }));
@@ -95,6 +75,7 @@ function update(item) {
         });
     };
 }
+exports.update = update;
 function remove(id) {
     return function (dispatch, getState) {
         dispatch(changeMessage(null));
@@ -106,7 +87,7 @@ function remove(id) {
             var result = JSON.parse(res.text);
             if (result.isSuccess) {
                 dispatch({
-                    type: ListDetailActionTypes.REMOVE,
+                    type: exports.ListDetailActionTypes.REMOVE,
                     id: id
                 });
                 dispatch(changeMessage({ type: "info", text: "save completed" }));
@@ -117,6 +98,7 @@ function remove(id) {
         });
     };
 }
+exports.remove = remove;
 function loadList() {
     return function (dispatch, getState) {
         dispatch(changeMode(""));
@@ -128,32 +110,36 @@ function loadList() {
             }
             dispatch(select(""));
             dispatch({
-                type: ListDetailActionTypes.LOAD_LIST,
+                type: exports.ListDetailActionTypes.LOAD_LIST,
                 items: JSON.parse(res.text).items
             });
         });
     };
 }
+exports.loadList = loadList;
 function changeMode(mode) {
     return function (dispatch, getState) {
         if (mode == "add") {
             dispatch(select(""));
         }
         dispatch({
-            type: ListDetailActionTypes.CHANGE_MODE,
+            type: exports.ListDetailActionTypes.CHANGE_MODE,
             mode: mode
         });
     };
 }
+exports.changeMode = changeMode;
 function changeMessage(message) {
     return {
-        type: ListDetailActionTypes.CHANGE_MESSAGE,
+        type: exports.ListDetailActionTypes.CHANGE_MESSAGE,
         message: message
     };
 }
+exports.changeMessage = changeMessage;
 function changeInput(input) {
     return {
-        type: ListDetailActionTypes.CHANGE_INPUT,
+        type: exports.ListDetailActionTypes.CHANGE_INPUT,
         input: input
     };
 }
+exports.changeInput = changeInput;

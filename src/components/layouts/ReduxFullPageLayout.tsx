@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom/server';
-import { devTools, persistState } from 'redux-devtools';
+//import { devTools, persistState } from 'redux-devtools';
 import ReduxProviderLayout from './ReduxProviderLayout';
 
 export interface ReduxFullPageLayoutProps {
@@ -11,7 +11,7 @@ export interface ReduxFullPageLayoutProps {
 	isDevelopment? : boolean
 }
 
-export default class ReduxFullPageLayout extends React.Component<ReduxFullPageLayoutProps, any>
+export class ReduxFullPageLayout extends React.Component<ReduxFullPageLayoutProps, any>
 {
 	render() {
 		//create contents html
@@ -44,4 +44,4 @@ export default class ReduxFullPageLayout extends React.Component<ReduxFullPageLa
 	}
 }
 
-module.exports = ReduxFullPageLayout;
+export default ReduxFullPageLayout

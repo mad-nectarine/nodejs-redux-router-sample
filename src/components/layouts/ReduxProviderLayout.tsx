@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
-import { DebugPanel, DevTools, LogMonitor } from 'redux-devtools/lib/react';
+//import { DebugPanel, DevTools, LogMonitor } from 'redux-devtools/lib/react';
 
 export interface ReduxProviderLayoutProps {
 	hasDevTool : boolean,
@@ -9,16 +9,16 @@ export interface ReduxProviderLayoutProps {
 	children? : React.ReactNode
 }
 
-export default class ReduxProviderLayout extends React.Component<ReduxProviderLayoutProps, any>
+export class ReduxProviderLayout extends React.Component<ReduxProviderLayoutProps, any>
 {
 	render() {
 		let debug = null;
-		if(this.props.hasDevTool){
-			debug= (
-				<DebugPanel top right bottom>
-					<DevTools store={this.props.store} monitor={LogMonitor} />
-					</DebugPanel>);	
-		}
+		// if(this.props.hasDevTool){
+		// 	debug= (
+		// 		<DebugPanel top right bottom>
+		// 			<DevTools store={this.props.store} monitor={LogMonitor} />
+		// 			</DebugPanel>);	
+		// }
 		return (
 			<div>
 				<Provider store={this.props.store}>
@@ -29,4 +29,4 @@ export default class ReduxProviderLayout extends React.Component<ReduxProviderLa
 	}
 }
 
-module.exports = ReduxProviderLayout;
+export default ReduxProviderLayout

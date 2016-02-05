@@ -1,22 +1,6 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var React = _interopRequireWildcard(_react);
-
-var _MessageArea = require('./MessageArea');
-
-var _MessageArea2 = _interopRequireDefault(_MessageArea);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24,7 +8,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ListDetailParent = (function (_React$Component) {
+var React = require('react');
+var MessageArea_1 = require('./MessageArea');
+
+var ListDetailParent = function (_React$Component) {
     _inherits(ListDetailParent, _React$Component);
 
     function ListDetailParent() {
@@ -86,11 +73,11 @@ var ListDetailParent = (function (_React$Component) {
             } else {
                 itemsDom = React.createElement("li", null, "no items");
             }
-            return React.createElement("section", null, React.createElement("h2", null, "List"), React.createElement(_MessageArea2.default, { "message": message }), React.createElement("section", null, React.createElement("div", { "className": "operations" }, React.createElement("input", { "type": "button", "value": "Load", "onClick": this.handleLoad.bind(this) }), React.createElement("input", { "type": "button", "value": "Add", "onClick": addHandler.bind(this) }), React.createElement("input", { "type": "button", "value": "Update", "onClick": updateHandler.bind(this), "disabled": !hasSelected }), React.createElement("input", { "type": "button", "value": "Remove", "onClick": removeHandler.bind(this), "disabled": !hasSelected })), React.createElement("ul", { "className": "list" }, itemsDom)), React.createElement("section", null, this.props.children));
+            return React.createElement("section", null, React.createElement("h2", null, "List"), React.createElement(MessageArea_1.default, { "message": message }), React.createElement("section", null, React.createElement("div", { "className": "operations" }, React.createElement("input", { "type": "button", "value": "Load", "onClick": this.handleLoad.bind(this) }), React.createElement("input", { "type": "button", "value": "Add", "onClick": addHandler.bind(this) }), React.createElement("input", { "type": "button", "value": "Update", "onClick": updateHandler.bind(this), "disabled": !hasSelected }), React.createElement("input", { "type": "button", "value": "Remove", "onClick": removeHandler.bind(this), "disabled": !hasSelected })), React.createElement("ul", { "className": "list" }, itemsDom)), React.createElement("section", null, this.props.children));
         }
     }]);
 
     return ListDetailParent;
-})(React.Component);
+}(React.Component);
 
-exports.default = ListDetailParent;
+exports.ListDetailParent = ListDetailParent;

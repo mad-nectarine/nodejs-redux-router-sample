@@ -1,26 +1,6 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var React = _interopRequireWildcard(_react);
-
-var _PlainFullPageLayout = require('../components/layouts/PlainFullPageLayout');
-
-var _PlainFullPageLayout2 = _interopRequireDefault(_PlainFullPageLayout);
-
-var _DefaultLayout = require('../components/layouts/DefaultLayout');
-
-var _DefaultLayout2 = _interopRequireDefault(_DefaultLayout);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -28,7 +8,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Error = (function (_React$Component) {
+var React = require('react');
+var PlainFullPageLayout_1 = require('../components/layouts/PlainFullPageLayout');
+var DefaultLayout_1 = require('../components/layouts/DefaultLayout');
+
+var Error = function (_React$Component) {
     _inherits(Error, _React$Component);
 
     function Error() {
@@ -40,13 +24,12 @@ var Error = (function (_React$Component) {
     _createClass(Error, [{
         key: 'render',
         value: function render() {
-            return React.createElement(_PlainFullPageLayout2.default, { "title": this.props.title }, React.createElement(_DefaultLayout2.default, { "title": this.props.message }, React.createElement("h2", null, this.props.error.status), React.createElement("pre", null, this.props.error.stack)));
+            return React.createElement(PlainFullPageLayout_1.default, { "title": this.props.title }, React.createElement(DefaultLayout_1.default, { "title": this.props.message }, React.createElement("h2", null, this.props.error.status), React.createElement("pre", null, this.props.error.stack)));
         }
     }]);
 
     return Error;
-})(React.Component);
+}(React.Component);
 
-exports.default = Error;
-
+exports.Error = Error;
 module.exports = Error;

@@ -1,29 +1,5 @@
 'use strict';
 
-var _path = require('path');
-
-var path = _interopRequireWildcard(_path);
-
-var _bodyParser = require('body-parser');
-
-var bodyParser = _interopRequireWildcard(_bodyParser);
-
-var _nodeUuid = require('node-uuid');
-
-var uuid = _interopRequireWildcard(_nodeUuid);
-
-var _fs = require('fs');
-
-var fs = _interopRequireWildcard(_fs);
-
-var _routesconfig = require('./src/config/routesconfig');
-
-var _routesconfig2 = _interopRequireDefault(_routesconfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 //"var hoge required 'hoge'" modules have no export default in ".d.ts"
 //I wanna modify to "import hoge from 'hoge'"
 var express = require('express');
@@ -31,7 +7,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
+var path = require('path');
+var bodyParser = require('body-parser');
+var uuid = require('node-uuid');
+var fs = require('fs');
+var routesconfig_1 = require('./src/config/routesconfig');
 var app = express();
 global["rootDir"] = path.resolve(__dirname);
 //===== view engine setup =====
@@ -79,7 +59,7 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 //===== set routes =====
-(0, _routesconfig2.default)(app);
+routesconfig_1.default(app);
 //===== error handlers =====
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

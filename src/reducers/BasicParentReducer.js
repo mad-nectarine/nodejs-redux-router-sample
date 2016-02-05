@@ -1,29 +1,18 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Reducer = undefined;
-
-var _redux = require('redux');
-
-var Redux = _interopRequireWildcard(_redux);
-
-var _BasicParentActions = require('../actions/BasicParentActions');
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
+var Redux = require('redux');
+var BasicParentActions_1 = require('../actions/BasicParentActions');
 //reducer
 function message() {
     var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
     var action = arguments[1];
 
     switch (action.type) {
-        case _BasicParentActions.BasicParentActionTypes.CHANGE_MESSAGE:
+        case BasicParentActions_1.BasicParentActionTypes.CHANGE_MESSAGE:
             return action.message;
         default:
             return state;
     }
 }
-var Reducer = exports.Reducer = Redux.combineReducers({ message: message });
-exports.default = Reducer;
+exports.Reducer = Redux.combineReducers({ message: message });
+exports.default = exports.Reducer;
